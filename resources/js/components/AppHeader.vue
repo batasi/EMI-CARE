@@ -62,6 +62,27 @@ const mainNavItems: NavItem[] = [
         title: 'About us',
         href: dashboard(),
     },
+    {
+        title: 'Ministries',
+        href: dashboard(),
+    },
+    {
+        title: 'Sermons',
+        href: dashboard(),
+    },
+    {
+        title: 'Events',
+        href: dashboard(),
+    },
+    {
+        title: 'Contact',
+        href: dashboard(),
+    },
+    {
+        title: 'Resources',
+        href: dashboard(),
+    },
+
 ];
 
 const rightNavItems: NavItem[] = [
