@@ -157,6 +157,17 @@ const user = computed(() => page.props.auth?.user)
 
 <template>
     <div class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <!-- Announcement Bar -->
+        <div class="border-t bg-gradient-to-r from-primary/10 to-primary/5 py-1.5">
+            <div class="container mx-auto px-4">
+                <div class="flex items-center justify-center text-sm">
+                    <span>Join us this Sunday at 9:00 AM & 11:00 AM</span>
+                    <Link href="/live" class="ml-2 font-medium text-primary hover:underline">
+                        Watch Live →
+                    </Link>
+                </div>
+            </div>
+        </div>
         <div class="container mx-auto flex h-20 items-center px-4">
             <!-- Mobile Menu Trigger -->
             <div class="lg:hidden">
@@ -222,7 +233,7 @@ const user = computed(() => page.props.auth?.user)
                                 <!-- Give Button Mobile -->
                                 <Button as-child class="w-full">
                                     <Link :href="'/give'">
-                                        💝 Give Online
+                                         Give Online
                                     </Link>
                                 </Button>
 
@@ -459,19 +470,6 @@ const user = computed(() => page.props.auth?.user)
                         <Link href="/login">Member Login</Link>
                     </Button>
                 </template>
-            </div>
-        </div>
-
-        <!-- Announcement Bar -->
-        <div class="border-t bg-gradient-to-r from-primary/10 to-primary/5 py-1.5">
-            <div class="container mx-auto px-4">
-                <div class="flex items-center justify-center text-sm">
-                    <span class="mr-2">📅</span>
-                    <span>Join us this Sunday at 9:00 AM & 11:00 AM</span>
-                    <Link href="/live" class="ml-2 font-medium text-primary hover:underline">
-                        Watch Live →
-                    </Link>
-                </div>
             </div>
         </div>
     </div>
