@@ -1,20 +1,21 @@
-<!-- resources/js/layouts/FrontAppLayout.vue -->
 <script setup lang="ts">
 import AppHeader from '@/components/AppHeader.vue'
 import AppShell from '@/components/AppShell.vue'
+import type { BreadcrumbItem, NavItem } from '@/types';
 import Footer from '@/components/Footer.vue'
-import type { BreadcrumbItem } from '@/types'
 
 type Props = {
     breadcrumbs?: BreadcrumbItem[];
     isLive?: boolean;
     showAnnouncement?: boolean;
+    footerItems?: NavItem[];
 };
 
 withDefaults(defineProps<Props>(), {
     breadcrumbs: () => [],
     isLive: false,
-    showAnnouncement: true
+    showAnnouncement: true,
+    footerItems: () => []
 });
 </script>
 
@@ -30,6 +31,6 @@ withDefaults(defineProps<Props>(), {
             <slot />
         </main>
 
-        <Footer />
+        <Footer :items="footerItems" />
     </AppShell>
 </template>

@@ -1,13 +1,12 @@
-<!-- resources/js/Pages/Welcome.vue -->
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3'
-import FrontAppLayout from '@/layouts/FrontAppLayout.vue'
 import { PlayCircle, Calendar, Clock, MapPin, Users, ArrowRight, ChevronRight } from 'lucide-vue-next'
+import { computed } from 'vue'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
+import FrontAppLayout from '@/layouts/FrontAppLayout.vue'
 import { type BreadcrumbItem } from '@/types'
-import { computed } from 'vue'
 
 const breadcrumbs: BreadcrumbItem[] = [
     {

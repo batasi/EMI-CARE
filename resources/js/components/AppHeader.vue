@@ -1,9 +1,7 @@
-<!-- resources/js/Components/Frontend/Layout/NavBar.vue -->
 <script setup lang="ts">
 import { Link, usePage } from '@inertiajs/vue3'
 import { Menu, Search, Heart, PlayCircle, Phone, Calendar } from 'lucide-vue-next'
 import { computed } from 'vue'
-import AppLogo from '@/components/AppLogo.vue'
 import AppLogoIcon from '@/components/AppLogoIcon.vue'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -37,8 +35,16 @@ import {
     TooltipTrigger,
 } from '@/components/ui/tooltip'
 import { useCurrentUrl } from '@/composables/useCurrentUrl'
-import { toUrl } from '@/lib/utils'
 import type { NavItem } from '@/types'
+
+type NavItemWithExact = NavItem & {
+    exact?: boolean
+    children?: NavItem[]
+}
+
+type NavItemWithBadge = NavItem & {
+    badge?: string | null
+}
 
 type Props = {
     showLiveBadge?: boolean
@@ -60,7 +66,7 @@ const { isCurrentUrl, whenCurrentUrl } = useCurrentUrl()
 const activeItemStyles = 'text-primary bg-primary/10'
 
 // Main Navigation Items with Dropdowns
-const mainNavItems: NavItem[] = [
+const mainNavItems: NavItemWithExact[] = [
     {
         title: 'Home',
         href: '/',
@@ -121,7 +127,7 @@ const mainNavItems: NavItem[] = [
 ]
 
 // Quick Action Items
-const quickActionItems: NavItem[] = [
+const quickActionItems: NavItemWithBadge[] = [
     {
         title: 'Live Stream',
         href: '/live',
@@ -142,16 +148,6 @@ const quickActionItems: NavItem[] = [
         title: 'Contact Us',
         href: '/contact',
         icon: Phone
-    }
-]
-
-// Right side items (Search, Give, etc)
-const rightNavItems: NavItem[] = [
-    {
-        title: 'Give Online',
-        href: '/give',
-        variant: 'default' as const,
-        className: 'bg-primary hover:bg-primary/90'
     }
 ]
 
