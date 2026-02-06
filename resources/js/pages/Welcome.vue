@@ -1,438 +1,469 @@
+<!-- resources/js/Pages/Welcome.vue -->
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
-import FrontAppLayout from '@/layouts/FrontAppLayout.vue';
-import { dashboard } from '@/routes';
-import { type BreadcrumbItem } from '@/types';
+import { Head, Link } from '@inertiajs/vue3'
+import FrontAppLayout from '@/layouts/FrontAppLayout.vue'
+import { PlayCircle, Calendar, Clock, MapPin, Users, ArrowRight, ChevronRight } from 'lucide-vue-next'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Separator } from '@/components/ui/separator'
+import { type BreadcrumbItem } from '@/types'
+import { computed } from 'vue'
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Dashboard',
-        href: dashboard().url,
+        title: 'Home',
+        href: '/',
     },
 ];
+
+// Mock data for events
+const upcomingEvents = [
+    {
+        id: 1,
+        title: 'Sunday Worship Service',
+        date: 'January 14, 2024',
+        time: '9:00 AM & 11:00 AM',
+        location: 'Main Sanctuary',
+        description: 'Join us for powerful worship and biblical teaching',
+        category: 'Weekly Service'
+    },
+    {
+        id: 2,
+        title: 'Midweek Prayer Night',
+        date: 'January 17, 2024',
+        time: '6:30 PM - 8:00 PM',
+        location: 'Prayer Chapel',
+        description: 'Corporate prayer and intercession',
+        category: 'Prayer'
+    },
+    {
+        id: 3,
+        title: 'Youth Conference 2024',
+        date: 'January 20-21, 2024',
+        time: '10:00 AM - 4:00 PM',
+        location: 'Youth Center',
+        description: 'Empowering the next generation',
+        category: 'Conference'
+    }
+]
+
+// Mock data for sermons
+const latestSermons = [
+    {
+        id: 1,
+        title: 'The Power of Faith in Difficult Times',
+        preacher: 'Pastor John Kamau',
+        date: 'January 14, 2024',
+        duration: '45 min',
+        scripture: 'Hebrews 11:1',
+        category: 'Teaching',
+        thumbnail: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    },
+    {
+        id: 2,
+        title: 'Finding Hope in Christ',
+        preacher: 'Rev. Sarah Mwangi',
+        date: 'January 7, 2024',
+        duration: '52 min',
+        scripture: 'Jeremiah 29:11',
+        category: 'Encouragement',
+        thumbnail: 'https://images.unsplash.com/photo-1563492065599-3520f775eeed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    },
+    {
+        id: 3,
+        title: 'New Year, New Vision',
+        preacher: 'Bishop David Ochieng',
+        date: 'December 31, 2023',
+        duration: '58 min',
+        scripture: 'Proverbs 29:18',
+        category: 'Vision',
+        thumbnail: 'https://images.unsplash.com/photo-1518834103325-6725c4b54c14?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
+    }
+]
+
+// Check if live stream is active
+const isLive = computed(() => {
+    const now = new Date()
+    const day = now.getDay() // 0 = Sunday
+    const hour = now.getHours()
+    return day === 0 && hour >= 8 && hour <= 13 // Sunday 8am-1pm
+})
 </script>
 
 <template>
+    <Head title="Welcome to Empowerment Missions International" />
 
-    <Head title="Dashboard" />
-   <!-- Top Announcement Bar -->
-    <div class="bg-blue-800 text-white py-2 px-4 text-center text-sm">
-        <div class="container mx-auto flex items-center justify-center">
-            Join us this Sunday at 9:00 AM & 11:00 AM |
-            <a href="/live" class="ml-2 font-semibold underline hover:text-yellow-300 transition-colors">
-            Watch Live Stream →
-            </a>
-        </div>
-    </div>
-    <FrontAppLayout :breadcrumbs="breadcrumbs">
-        <div class="min-h-screen bg-gray-50">
+    <FrontAppLayout :breadcrumbs="breadcrumbs" :is-live="isLive">
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden bg-gradient-to-br from-primary/5 via-white to-primary/5">
+            <div class="absolute inset-0 bg-grid-black/[0.02] bg-[size:20px_20px]" />
 
+            <div class="container relative mx-auto px-4 py-24 lg:py-32">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <!-- Left Content -->
+                    <div class="space-y-8">
+                        <div class="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
+                            <PlayCircle class="mr-2 h-4 w-4" />
+                            Join us this Sunday at 9:00 AM & 11:00 AM
+                        </div>
 
-            <!-- Navigation -->
-            <nav class="bg-white shadow-md sticky top-0 z-50">
-            <div class="container mx-auto px-4">
-                <div class="flex items-center justify-between h-20">
-                <!-- Logo -->
-                <div class="flex items-center space-x-3">
-                    <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center">
-                    <span class="text-white font-bold text-xl">EMI</span>
+                        <h1 class="text-4xl lg:text-6xl font-bold tracking-tight">
+                            A Community of
+                            <span class="text-primary">Faith</span>,
+                            <span class="text-primary">Hope</span> &
+                            <span class="text-primary">Love</span>
+                        </h1>
+
+                        <p class="text-xl text-muted-foreground">
+                            At Empowerment Missions International, we're passionate about helping people
+                            discover their God-given purpose and grow in their relationship with Christ.
+                        </p>
+
+                        <div class="flex flex-wrap gap-4">
+                            <Button as-child size="lg" class="bg-primary hover:bg-primary/90">
+                                <Link href="/live" class="flex items-center gap-2">
+                                    <PlayCircle class="h-5 w-5" />
+                                    Watch Live Stream
+                                </Link>
+                            </Button>
+
+                            <Button as-child size="lg" variant="outline">
+                                <Link href="/service-times" class="flex items-center gap-2">
+                                    <Calendar class="h-5 w-5" />
+                                    Service Times
+                                </Link>
+                            </Button>
+                        </div>
                     </div>
+
+                    <!-- Right Content - Stats -->
+                    <div class="grid grid-cols-2 gap-6">
+                        <Card class="border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
+                            <CardHeader class="pb-2">
+                                <CardTitle class="text-4xl font-bold text-primary">2</CardTitle>
+                                <CardDescription>Sunday Services</CardDescription>
+                            </CardHeader>
+                        </Card>
+
+                        <Card class="border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
+                            <CardHeader class="pb-2">
+                                <CardTitle class="text-4xl font-bold text-primary">15+</CardTitle>
+                                <CardDescription>Active Ministries</CardDescription>
+                            </CardHeader>
+                        </Card>
+
+                        <Card class="border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
+                            <CardHeader class="pb-2">
+                                <CardTitle class="text-4xl font-bold text-primary">24/7</CardTitle>
+                                <CardDescription>Prayer Line Available</CardDescription>
+                            </CardHeader>
+                        </Card>
+
+                        <Card class="border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
+                            <CardHeader class="pb-2">
+                                <CardTitle class="text-4xl font-bold text-primary">Online</CardTitle>
+                                <CardDescription>Global Live Streaming</CardDescription>
+                            </CardHeader>
+                        </Card>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Welcome Section -->
+        <section class="py-20">
+            <div class="container mx-auto px-4">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
                     <div>
-                    <h1 class="text-2xl font-bold text-gray-900">Empowerment Missions International</h1>
-                    <p class="text-sm text-gray-600">Nairobi, Kenya</p>
+                        <img
+                            src="https://images.unsplash.com/photo-1563492065599-3520f775eeed?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                            alt="Church community worship"
+                            class="rounded-2xl shadow-2xl"
+                        />
                     </div>
-                </div>
 
-                <!-- Desktop Navigation -->
-                <div class="hidden md:flex items-center space-x-6">
-                    <a href="/" class="font-semibold text-blue-600 hover:text-blue-800 transition-colors">Home</a>
-                    <a href="/about" class="text-gray-700 hover:text-blue-600 transition-colors">About Us</a>
-                    <a href="/ministries" class="text-gray-700 hover:text-blue-600 transition-colors">Ministries</a>
-                    <a href="/sermons" class="text-gray-700 hover:text-blue-600 transition-colors">Sermons</a>
-                    <a href="/events" class="text-gray-700 hover:text-blue-600 transition-colors">Events</a>
-                    <a href="/give" class="bg-yellow-500 text-gray-900 px-4 py-2 rounded-lg font-semibold hover:bg-yellow-600 transition-colors">
-                    Give Online
-                    </a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <button class="md:hidden p-2 rounded-lg hover:bg-gray-100">
-                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-                    </svg>
-                </button>
-                </div>
-            </div>
-            </nav>
-
-            <!-- Hero Section -->
-            <section class="relative h-[80vh] min-h-[600px] flex items-center overflow-hidden">
-            <!-- Background -->
-            <div class="absolute inset-0 z-0">
-                <div class="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-purple-900/60"></div>
-                <img
-                src="https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-                alt="Church worship"
-                class="w-full h-full object-cover"
-                />
-            </div>
-
-            <!-- Content -->
-            <div class="container mx-auto px-4 relative z-10">
-                <div class="max-w-3xl">
-                <span class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-white text-sm font-semibold mb-6">
-                    Experience God's Presence
-                </span>
-
-                <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-                    A Community of
-                    <span class="text-yellow-400">Faith</span>,
-                    <span class="text-yellow-400">Hope</span> &
-                    <span class="text-yellow-400">Love</span>
-                </h1>
-
-                <p class="text-xl text-white/90 mb-8 max-w-2xl">
-                    Join us as we worship, grow in faith, and serve our community in Nairobi and beyond.
-                </p>
-
-                <div class="flex flex-wrap gap-4">
-                    <a href="/live" class="bg-yellow-500 text-gray-900 px-8 py-3 rounded-lg font-semibold text-lg hover:bg-yellow-600 transition-colors flex items-center">
-                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
-                    </svg>
-                    Watch Live
-                    </a>
-
-                    <a href="/service-times" class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-lg font-semibold text-lg hover:bg-white/10 transition-colors">
-                    Service Times
-                    </a>
-                </div>
-                </div>
-            </div>
-            </section>
-
-            <!-- Quick Stats -->
-            <div class="bg-white py-8 shadow-lg -mt-12 relative z-20 rounded-t-3xl">
-            <div class="container mx-auto px-4">
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-blue-600 mb-2">2</div>
-                    <div class="text-gray-600">Sunday Services</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-blue-600 mb-2">24/7</div>
-                    <div class="text-gray-600">Prayer Line</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-blue-600 mb-2">15+</div>
-                    <div class="text-gray-600">Ministries</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-3xl font-bold text-blue-600 mb-2">Online</div>
-                    <div class="text-gray-600">Live Streaming</div>
-                </div>
-                </div>
-            </div>
-            </div>
-
-            <!-- Welcome Section -->
-            <section class="py-20">
-            <div class="container mx-auto px-4">
-                <div class="flex flex-col md:flex-row items-center gap-12">
-                <div class="md:w-1/2">
-                    <img
-                    src="https://images.unsplash.com/photo-1563492065599-3520f775eeed?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                    alt="Church community"
-                    class="rounded-2xl shadow-xl"
-                    />
-                </div>
-
-                <div class="md:w-1/2">
-                    <span class="text-blue-600 font-semibold uppercase tracking-wider">Welcome</span>
-                    <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-6">
-                    You're Welcome Here
-                    </h2>
-                    <p class="text-gray-600 text-lg mb-6">
-                    At Empowerment Missions, we are passionate about helping people discover their purpose and grow in their relationship with God. Whether you're new to faith or have been following Jesus for years, there's a place for you here.
-                    </p>
-                    <div class="space-y-4 mb-8">
-                    <div class="flex items-center">
-                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                        <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                        </svg>
+                    <div class="space-y-6">
+                        <div class="inline-flex items-center rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
+                            <Users class="mr-2 h-4 w-4" />
+                            Welcome Home
                         </div>
-                        <span class="text-gray-700">Vibrant worship and biblical teaching</span>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                        <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                        </svg>
+
+                        <h2 class="text-4xl font-bold tracking-tight">
+                            You're Welcome Here
+                        </h2>
+
+                        <p class="text-lg text-muted-foreground">
+                            Whether you're new to faith or have been following Jesus for years,
+                            there's a place for you here. We're a diverse community united by
+                            our love for God and passion for seeing lives transformed.
+                        </p>
+
+                        <Separator />
+
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
+                                    <CheckIcon class="h-4 w-4 text-primary" />
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">Biblical Teaching</h4>
+                                    <p class="text-sm text-muted-foreground">
+                                        Practical, relevant messages from God's Word
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
+                                    <CheckIcon class="h-4 w-4 text-primary" />
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">Authentic Community</h4>
+                                    <p class="text-sm text-muted-foreground">
+                                        Genuine relationships and support for all ages
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-start gap-4">
+                                <div class="mt-1 flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
+                                    <CheckIcon class="h-4 w-4 text-primary" />
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold">Purposeful Service</h4>
+                                    <p class="text-sm text-muted-foreground">
+                                        Opportunities to make a difference in our world
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <span class="text-gray-700">Loving community for all ages</span>
+
+                        <Button as-child variant="outline" class="mt-4">
+                            <Link href="/about" class="flex items-center gap-2">
+                                Learn More About Us
+                                <ArrowRight class="h-4 w-4" />
+                            </Link>
+                        </Button>
                     </div>
-                    <div class="flex items-center">
-                        <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
-                        <svg class="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-                        </svg>
-                        </div>
-                        <span class="text-gray-700">Opportunities to serve and grow</span>
-                    </div>
-                    </div>
-                    <a href="/about" class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition-colors">
-                    Learn more about us
-                    <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                    </svg>
-                    </a>
-                </div>
                 </div>
             </div>
-            </section>
+        </section>
 
-            <!-- Upcoming Events -->
-            <section class="py-20 bg-gray-100">
+        <!-- Upcoming Events -->
+        <section class="py-20 bg-gradient-to-b from-primary/5 to-transparent">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-12">
-                <span class="text-blue-600 font-semibold uppercase tracking-wider">What's Happening</span>
-                <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-4">Upcoming Events</h2>
-                <p class="text-gray-600 text-lg max-w-2xl mx-auto">Join us for our upcoming services, conferences, and community events</p>
+                    <div class="inline-flex items-center rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-4">
+                        <Calendar class="mr-2 h-4 w-4" />
+                        What's Happening
+                    </div>
+                    <h2 class="text-4xl font-bold tracking-tight mb-4">Upcoming Events</h2>
+                    <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+                        Join us for worship, teaching, and community gatherings
+                    </p>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Event 1 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                    <div class="p-6">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex flex-col items-center justify-center mr-4">
-                        <span class="text-blue-600 font-bold text-lg">SUN</span>
-                        <span class="text-gray-900 font-bold">14</span>
-                        </div>
-                        <div>
-                        <h3 class="font-bold text-lg text-gray-900">Sunday Service</h3>
-                        <p class="text-gray-600">9:00 AM & 11:00 AM</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 mb-4">Join us for worship, prayer, and biblical teaching.</p>
-                    <a href="/events/sunday-service" class="text-blue-600 font-semibold hover:text-blue-800 transition-colors">
-                        More details →
-                    </a>
-                    </div>
-                </div>
-
-                <!-- Event 2 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                    <div class="p-6">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex flex-col items-center justify-center mr-4">
-                        <span class="text-blue-600 font-bold text-lg">WED</span>
-                        <span class="text-gray-900 font-bold">17</span>
-                        </div>
-                        <div>
-                        <h3 class="font-bold text-lg text-gray-900">Midweek Prayer</h3>
-                        <p class="text-gray-600">6:30 PM - 8:00 PM</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 mb-4">Corporate prayer and intercession night.</p>
-                    <a href="/events/prayer-night" class="text-blue-600 font-semibold hover:text-blue-800 transition-colors">
-                        More details →
-                    </a>
-                    </div>
-                </div>
-
-                <!-- Event 3 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                    <div class="p-6">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex flex-col items-center justify-center mr-4">
-                        <span class="text-blue-600 font-bold text-lg">SAT</span>
-                        <span class="text-gray-900 font-bold">20</span>
-                        </div>
-                        <div>
-                        <h3 class="font-bold text-lg text-gray-900">Youth Conference</h3>
-                        <p class="text-gray-600">10:00 AM - 4:00 PM</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-700 mb-4">Empowering the next generation.</p>
-                    <a href="/events/youth-conference" class="text-blue-600 font-semibold hover:text-blue-800 transition-colors">
-                        More details →
-                    </a>
-                    </div>
-                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <Card v-for="event in upcomingEvents" :key="event.id" class="group hover:shadow-lg transition-all duration-300 border-primary/10">
+                        <CardHeader>
+                            <div class="flex items-center justify-between">
+                                <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                                    {{ event.category }}
+                                </span>
+                                <Calendar class="h-5 w-5 text-muted-foreground" />
+                            </div>
+                            <CardTitle class="group-hover:text-primary transition-colors">
+                                {{ event.title }}
+                            </CardTitle>
+                            <CardDescription>
+                                {{ event.description }}
+                            </CardDescription>
+                        </CardHeader>
+                        <CardContent class="space-y-4">
+                            <div class="flex items-center gap-2 text-sm">
+                                <Clock class="h-4 w-4 text-muted-foreground" />
+                                <span>{{ event.date }} • {{ event.time }}</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm">
+                                <MapPin class="h-4 w-4 text-muted-foreground" />
+                                <span>{{ event.location }}</span>
+                            </div>
+                            <Button as-child variant="ghost" class="w-full group/btn">
+                                <Link :href="`/events/${event.id}`" class="flex items-center justify-center gap-2">
+                                    View Details
+                                    <ChevronRight class="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
+                                </Link>
+                            </Button>
+                        </CardContent>
+                    </Card>
                 </div>
 
                 <div class="text-center mt-12">
-                <a href="/events" class="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors">
-                    View All Events
-                    <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                    </svg>
-                </a>
+                    <Button as-child size="lg" class="bg-primary hover:bg-primary/90">
+                        <Link href="/events" class="flex items-center gap-2">
+                            View All Events
+                            <ArrowRight class="h-5 w-5" />
+                        </Link>
+                    </Button>
                 </div>
             </div>
-            </section>
+        </section>
 
-            <!-- Latest Sermons -->
-            <section class="py-20">
+        <!-- Latest Sermons -->
+        <section class="py-20">
             <div class="container mx-auto px-4">
                 <div class="text-center mb-12">
-                <span class="text-blue-600 font-semibold uppercase tracking-wider">Recent Messages</span>
-                <h2 class="text-4xl font-bold text-gray-900 mt-2 mb-4">Latest Sermons</h2>
-                <p class="text-gray-600 text-lg max-w-2xl mx-auto">Listen to our latest messages and be inspired</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                <!-- Sermon 1 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300">
-                    <div class="h-48 bg-blue-100 relative">
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <button class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors">
-                        <svg class="w-8 h-8 text-blue-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
-                        </svg>
-                        </button>
+                    <div class="inline-flex items-center rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-4">
+                        <PlayCircle class="mr-2 h-4 w-4" />
+                        Recent Messages
                     </div>
-                    </div>
-                    <div class="p-6">
-                    <span class="text-sm text-blue-600 font-semibold">January 14, 2024</span>
-                    <h3 class="text-xl font-bold text-gray-900 my-2">The Power of Faith</h3>
-                    <p class="text-gray-600 mb-4">How faith transforms challenges into victories</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-gray-700 font-medium">Pastor John Kamau</span>
-                        <span class="text-sm text-gray-500">45 min</span>
-                    </div>
-                    </div>
-                </div>
-
-                <!-- Sermon 2 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300">
-                    <div class="h-48 bg-purple-100 relative">
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <button class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors">
-                        <svg class="w-8 h-8 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
-                        </svg>
-                        </button>
-                    </div>
-                    </div>
-                    <div class="p-6">
-                    <span class="text-sm text-purple-600 font-semibold">January 7, 2024</span>
-                    <h3 class="text-xl font-bold text-gray-900 my-2">Finding Hope in Christ</h3>
-                    <p class="text-gray-600 mb-4">Discovering hope in difficult seasons</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-gray-700 font-medium">Rev. Sarah Mwangi</span>
-                        <span class="text-sm text-gray-500">52 min</span>
-                    </div>
-                    </div>
-                </div>
-
-                <!-- Sermon 3 -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300">
-                    <div class="h-48 bg-yellow-100 relative">
-                    <div class="absolute inset-0 flex items-center justify-center">
-                        <button class="w-16 h-16 bg-white/90 rounded-full flex items-center justify-center hover:bg-white transition-colors">
-                        <svg class="w-8 h-8 text-yellow-600" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/>
-                        </svg>
-                        </button>
-                    </div>
-                    </div>
-                    <div class="p-6">
-                    <span class="text-sm text-yellow-600 font-semibold">December 31, 2023</span>
-                    <h3 class="text-xl font-bold text-gray-900 my-2">New Year, New Vision</h3>
-                    <p class="text-gray-600 mb-4">Setting godly goals for the new year</p>
-                    <div class="flex items-center justify-between">
-                        <span class="text-gray-700 font-medium">Bishop David Ochieng</span>
-                        <span class="text-sm text-gray-500">58 min</span>
-                    </div>
-                    </div>
-                </div>
-                </div>
-
-                <div class="text-center">
-                <a href="/sermons" class="inline-flex items-center px-6 py-3 bg-gray-900 text-white font-semibold rounded-lg hover:bg-black transition-colors">
-                    Browse All Sermons
-                    <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
-                    </svg>
-                </a>
-                </div>
-            </div>
-            </section>
-
-            <!-- Footer -->
-            <footer class="bg-gray-900 text-white py-12">
-            <div class="container mx-auto px-4">
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <div class="flex items-center space-x-3 mb-6">
-                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-                        <span class="text-white font-bold">EMI</span>
-                    </div>
-                    <div>
-                        <h3 class="font-bold text-lg">Empowerment Missions International</h3>
-                        <p class="text-gray-400 text-sm">Nairobi, Kenya</p>
-                    </div>
-                    </div>
-                    <p class="text-gray-400">
-                    A vibrant community of faith where lives are transformed through the power of the Holy Spirit.
+                    <h2 class="text-4xl font-bold tracking-tight mb-4">Latest Sermons</h2>
+                    <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+                        Be inspired by God's Word through our latest teachings
                     </p>
                 </div>
 
-                <div>
-                    <h4 class="font-bold text-lg mb-6">Quick Links</h4>
-                    <ul class="space-y-3">
-                    <li><a href="/about" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
-                    <li><a href="/beliefs" class="text-gray-400 hover:text-white transition-colors">Our Beliefs</a></li>
-                    <li><a href="/leadership" class="text-gray-400 hover:text-white transition-colors">Leadership</a></li>
-                    <li><a href="/ministries" class="text-gray-400 hover:text-white transition-colors">Ministries</a></li>
-                    </ul>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <Card v-for="sermon in latestSermons" :key="sermon.id" class="group overflow-hidden hover:shadow-xl transition-all duration-300">
+                        <div class="aspect-video overflow-hidden">
+                            <img
+                                :src="sermon.thumbnail"
+                                :alt="sermon.title"
+                                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <Button size="icon" class="h-16 w-16 rounded-full bg-white/90 hover:bg-white">
+                                    <PlayCircle class="h-8 w-8 text-primary" />
+                                </Button>
+                            </div>
+                        </div>
+
+                        <CardHeader>
+                            <div class="flex items-center justify-between">
+                                <span class="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                                    {{ sermon.category }}
+                                </span>
+                                <span class="text-sm text-muted-foreground">{{ sermon.duration }}</span>
+                            </div>
+                            <CardTitle class="group-hover:text-primary transition-colors line-clamp-2">
+                                {{ sermon.title }}
+                            </CardTitle>
+                            <CardDescription class="line-clamp-2">
+                                {{ sermon.scripture }}
+                            </CardDescription>
+                        </CardHeader>
+
+                        <CardContent>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
+                                        <Users class="h-5 w-5 text-primary" />
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-medium">{{ sermon.preacher }}</p>
+                                        <p class="text-xs text-muted-foreground">{{ sermon.date }}</p>
+                                    </div>
+                                </div>
+                                <Button as-child size="sm" variant="ghost">
+                                    <Link :href="`/sermons/${sermon.id}`" class="flex items-center gap-1">
+                                        Listen
+                                        <ArrowRight class="h-4 w-4" />
+                                    </Link>
+                                </Button>
+                            </div>
+                        </CardContent>
+                    </Card>
                 </div>
 
-                <div>
-                    <h4 class="font-bold text-lg mb-6">Connect</h4>
-                    <ul class="space-y-3">
-                    <li><a href="/sermons" class="text-gray-400 hover:text-white transition-colors">Sermons</a></li>
-                    <li><a href="/events" class="text-gray-400 hover:text-white transition-colors">Events</a></li>
-                    <li><a href="/give" class="text-gray-400 hover:text-white transition-colors">Give Online</a></li>
-                    <li><a href="/contact" class="text-gray-400 hover:text-white transition-colors">Contact Us</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="font-bold text-lg mb-6">Contact Info</h4>
-                    <ul class="space-y-3 text-gray-400">
-                    <li class="flex items-center">
-                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
-                        </svg>
-                        123 Church Street, Nairobi
-                    </li>
-                    <li class="flex items-center">
-                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
-                        </svg>
-                        +254 700 123 456
-                    </li>
-                    <li class="flex items-center">
-                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
-                        </svg>
-                        info@empowermentmissions.org.uk
-                    </li>
-                    </ul>
-                </div>
-                </div>
-
-                <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-                <p>© 2024 Empowerment Missions International. All rights reserved.</p>
+                <div class="text-center mt-12">
+                    <Button as-child size="lg" variant="outline" class="border-primary/20 hover:bg-primary/5">
+                        <Link href="/sermons" class="flex items-center gap-2">
+                            Browse All Sermons
+                            <ArrowRight class="h-5 w-5" />
+                        </Link>
+                    </Button>
                 </div>
             </div>
-            </footer>
-        </div>
-    </FrontAppLayout>
+        </section>
 
+        <!-- CTA Section -->
+        <section class="py-20 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10">
+            <div class="container mx-auto px-4">
+                <div class="text-center">
+                    <h2 class="text-4xl font-bold tracking-tight mb-6">
+                        Experience God's Presence With Us
+                    </h2>
+                    <p class="text-xl text-muted-foreground max-w-3xl mx-auto mb-10">
+                        Whether you join us in person or online, we'd love to welcome you
+                        into our community of faith, hope, and love.
+                    </p>
+
+                    <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-12">
+                        <Card class="bg-white/50 backdrop-blur-sm border-primary/20">
+                            <CardHeader>
+                                <CardTitle class="flex items-center gap-3">
+                                    <MapPin class="h-6 w-6 text-primary" />
+                                    In Person
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent class="space-y-4">
+                                <p class="text-muted-foreground">Join us at our church campus in Nairobi</p>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex items-center gap-2">
+                                        <MapPin class="h-4 w-4 text-muted-foreground" />
+                                        <span>123 Church Street, Nairobi, Kenya</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <Clock class="h-4 w-4 text-muted-foreground" />
+                                        <span>Sunday: 9:00 AM & 11:00 AM</span>
+                                    </div>
+                                </div>
+                                <Button as-child variant="outline" class="w-full">
+                                    <Link href="/directions" class="flex items-center justify-center gap-2">
+                                        <MapPin class="h-4 w-4" />
+                                        Get Directions
+                                    </Link>
+                                </Button>
+                            </CardContent>
+                        </Card>
+
+                        <Card class="bg-white/50 backdrop-blur-sm border-primary/20">
+                            <CardHeader>
+                                <CardTitle class="flex items-center gap-3">
+                                    <PlayCircle class="h-6 w-6 text-primary" />
+                                    Online
+                                </CardTitle>
+                            </CardHeader>
+                            <CardContent class="space-y-4">
+                                <p class="text-muted-foreground">Join our live stream from anywhere in the world</p>
+                                <div class="space-y-2 text-sm">
+                                    <div class="flex items-center gap-2">
+                                        <PlayCircle class="h-4 w-4 text-muted-foreground" />
+                                        <span>YouTube Live Stream</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <Users class="h-4 w-4 text-muted-foreground" />
+                                        <span>Facebook Live</span>
+                                    </div>
+                                </div>
+                                <Button as-child class="w-full bg-primary hover:bg-primary/90">
+                                    <Link href="/live" class="flex items-center justify-center gap-2">
+                                        <PlayCircle class="h-4 w-4" />
+                                        Watch Online Now
+                                    </Link>
+                                </Button>
+                            </CardContent>
+                        </Card>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </FrontAppLayout>
 </template>
+
+<script lang="ts">
+const CheckIcon = {
+    template: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>`
+}
+</script>
