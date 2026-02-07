@@ -63,7 +63,7 @@ const props = withDefaults(defineProps<Props>(), {
     showLiveBadge: false,
     showGiveButton: true,
     churchName: 'Empowerment Missions International',
-    churchLocation: 'Nairobi, Kenya'
+    churchLocation: ''
 })
 
 const page = usePage()
