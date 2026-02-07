@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import AppHeader from '@/components/AppHeader.vue'
 import AppShell from '@/components/AppShell.vue'
-import type { BreadcrumbItem, NavItem } from '@/types';
+import type { BreadcrumbItem } from '@/types';
 import Footer from '@/components/Footer.vue'
 
 type Props = {
     breadcrumbs?: BreadcrumbItem[];
     isLive?: boolean;
     showAnnouncement?: boolean;
-    footerItems?: NavItem[];
+    footerItems?: any[];
 };
 
 withDefaults(defineProps<Props>(), {
