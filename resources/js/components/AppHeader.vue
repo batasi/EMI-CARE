@@ -155,7 +155,7 @@ const user = computed(() => page.props.auth?.user)
 </script>
 
 <template>
-    <div class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur-lg supports-[backdrop-filter]:bg-background/80 dark:border-gray-800">
+    <div class="sticky top-0 z-50 w-full border-b bg-green-500 backdrop-blur-lg supports-[backdrop-filter]:bg-green-500 dark:border-gray-800">
         <!-- Announcement Bar -->
         <div class="border-t bg-gradient-to-r from-primary/10 via-accent/5 to-secondary/10 py-2 dark:from-primary/20 dark:via-accent/10 dark:to-secondary/20">
             <div class="container mx-auto px-4">
