@@ -194,16 +194,13 @@ const isLive = computed(() => {
             <div class="absolute top-0 right-0 w-72 h-72 bg-primary/5 rounded-full -translate-y-36 translate-x-36" />
             <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-50 rounded-full translate-y-48 -translate-x-48" />
 
-            <div class="container relative mx-auto px-4 py-16 lg:py-24">
+            <div class="container relative mx-auto px-4 py-16 ">
                 <div class="grid lg:grid-cols-2 gap-12 items-center">
                     <!-- Left Content -->
                     <div class="space-y-8">
-                        <div class="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
-                            <Shield class="mr-2 h-4 w-4" />
-                            UK Registered Charity No: {{ charityInfo.charityNumber }}
-                        </div>
 
-                        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-tight">
+
+                        <h1 class="text-4xl lg:text-5xl xl:text-5xl font-bold tracking-tight leading-tight">
                             Empowering Communities
                             <span class="text-primary block">Through Faith & Action</span>
                         </h1>
