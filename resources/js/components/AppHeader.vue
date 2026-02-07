@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Link, usePage } from '@inertiajs/vue3'
-import { Menu, Search, Heart, PlayCircle, Phone, Calendar } from 'lucide-vue-next'
+import { Menu, Heart, PlayCircle, Phone, Calendar } from 'lucide-vue-next'
 import { computed } from 'vue'
 import AppLogoIcon from '@/components/AppLogoIcon.vue'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -82,28 +82,7 @@ const mainNavItems: NavItemWithExact[] = [
             { title: 'Our Vision', href: '/about/vision' }
         ]
     },
-    {
-        title: 'Ministries',
-        href: '/ministries',
-        children: [
-            { title: 'Men\'s Ministry', href: '/ministries/mens' },
-            { title: 'Women\'s Ministry', href: '/ministries/womens' },
-            { title: 'Youth Ministry', href: '/ministries/youth' },
-            { title: 'Children Ministry', href: '/ministries/children' },
-            { title: 'Worship Ministry', href: '/ministries/worship' },
-            { title: 'Outreach Ministry', href: '/ministries/outreach' }
-        ]
-    },
-    {
-        title: 'Sermons',
-        href: '/sermons',
-        children: [
-            { title: 'Latest Messages', href: '/sermons/latest' },
-            { title: 'Video Sermons', href: '/sermons/video' },
-            { title: 'Audio Sermons', href: '/sermons/audio' },
-            { title: 'Sermon Series', href: '/sermons/series' }
-        ]
-    },
+
     {
         title: 'Events',
         href: '/events',
@@ -134,11 +113,7 @@ const quickActionItems: NavItemWithBadge[] = [
         icon: PlayCircle,
         badge: props.showLiveBadge ? 'Live' : null
     },
-    {
-        title: 'Prayer Line',
-        href: '/prayer',
-        icon: Heart
-    },
+
     {
         title: 'Service Times',
         href: '/service-times',
@@ -168,7 +143,7 @@ const user = computed(() => page.props.auth?.user)
                 </div>
             </div>
         </div>
-        <div class="container mx-auto flex h-20 items-center px-4">
+        <div class="container mx-auto flex h-24 items-center px-4">
             <!-- Mobile Menu Trigger -->
             <div class="lg:hidden">
                 <Sheet>
@@ -181,9 +156,9 @@ const user = computed(() => page.props.auth?.user)
                         <SheetTitle class="sr-only">Navigation Menu</SheetTitle>
                         <SheetHeader class="flex justify-start text-left mb-8">
                             <div class="flex items-center gap-x-3">
-                                <AppLogoIcon class="size-8 fill-current text-primary" />
+                                <AppLogoIcon class="size-10 fill-current text-primary" />
                                 <div>
-                                    <div class="font-bold text-lg">{{ churchName }}</div>
+                                    <div class="font-bold text-xl tracking-tight">{{ churchName }}</div>
                                     <div class="text-sm text-muted-foreground">{{ churchLocation }}</div>
                                 </div>
                             </div>
@@ -255,17 +230,17 @@ const user = computed(() => page.props.auth?.user)
             </div>
 
             <!-- Logo -->
-            <Link href="/" class="flex items-center gap-x-3">
-                <AppLogoIcon class="size-10 fill-current text-primary" />
+            <Link href="/" class="flex items-center gap-x-3 lg:gap-x-4">
+                <AppLogoIcon class="size-12 fill-current text-primary" />
                 <div class="hidden sm:block">
-                    <div class="font-bold text-xl tracking-tight">{{ churchName }}</div>
-                    <div class="text-sm text-muted-foreground">{{ churchLocation }}</div>
+                    <div class="font-bold text-2xl tracking-tight">{{ churchName }}</div>
+                    <div class="text-sm text-muted-foreground mt-0.5">{{ churchLocation }}</div>
                 </div>
             </Link>
 
             <!-- Desktop Navigation -->
             <div class="hidden h-full lg:flex lg:flex-1">
-                <NavigationMenu class="ml-8 flex h-full items-stretch">
+                <NavigationMenu class="ml-10 flex h-full items-stretch">
                     <NavigationMenuList class="flex h-full items-stretch space-x-1">
                         <NavigationMenuItem
                             v-for="(item, index) in mainNavItems"
@@ -275,7 +250,7 @@ const user = computed(() => page.props.auth?.user)
                             <template v-if="item.children">
                                 <NavigationMenuTrigger
                                     :class="[
-                                        'h-10 px-4 text-sm font-medium',
+                                        'h-12 px-4 text-sm font-medium transition-colors hover:text-primary',
                                         isCurrentUrl(item.href) ? activeItemStyles : ''
                                     ]"
                                 >
@@ -323,7 +298,7 @@ const user = computed(() => page.props.auth?.user)
                                 <Link
                                     :class="[
                                         navigationMenuTriggerStyle(),
-                                        'h-10 px-4 text-sm font-medium cursor-pointer',
+                                        'h-12 px-4 text-sm font-medium cursor-pointer transition-colors hover:text-primary',
                                         isCurrentUrl(item.href) ? activeItemStyles : ''
                                     ]"
                                     :href="item.href"
@@ -343,19 +318,7 @@ const user = computed(() => page.props.auth?.user)
             <!-- Right Side Actions -->
             <div class="ml-auto flex items-center space-x-3">
                 <!-- Search -->
-                <TooltipProvider :delay-duration="0">
-                    <Tooltip>
-                        <TooltipTrigger as-child>
-                            <Button variant="ghost" size="icon" class="h-9 w-9">
-                                <Search class="h-4 w-4" />
-                                <span class="sr-only">Search</span>
-                            </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                            <p>Search</p>
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
+
 
                 <!-- Live Stream Badge -->
                 <Button
@@ -380,17 +343,17 @@ const user = computed(() => page.props.auth?.user)
                                     variant="ghost"
                                     size="icon"
                                     as-child
-                                    class="h-9 w-9 relative"
+                                    class="h-10 w-10 relative"
                                 >
                                     <Link :href="action.href">
                                         <span class="sr-only">{{ action.title }}</span>
                                         <component
                                             :is="action.icon"
-                                            class="h-4 w-4"
+                                            class="h-5 w-5"
                                         />
                                         <span
                                             v-if="action.badge"
-                                            class="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-red-500 text-[10px] text-white flex items-center justify-center"
+                                            class="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-red-500 text-[10px] text-white flex items-center justify-center"
                                         >
                                             ●
                                         </span>
@@ -409,7 +372,7 @@ const user = computed(() => page.props.auth?.user)
                     v-if="showGiveButton"
                     as-child
                     size="sm"
-                    class="hidden lg:flex gap-1.5 bg-primary hover:bg-primary/90"
+                    class="hidden lg:flex gap-1.5 bg-primary hover:bg-primary/90 h-10"
                 >
                     <Link href="/give" class="flex items-center">
                         <Heart class="h-4 w-4" />
@@ -421,14 +384,14 @@ const user = computed(() => page.props.auth?.user)
                 <template v-if="user">
                     <DropdownMenu>
                         <DropdownMenuTrigger as-child>
-                            <Button variant="ghost" size="icon" class="relative h-9 w-9 rounded-full">
-                                <Avatar class="h-8 w-8">
+                            <Button variant="ghost" size="icon" class="relative h-10 w-10 rounded-full">
+                                <Avatar class="h-9 w-9">
                                     <AvatarImage
                                         v-if="user.avatar"
                                         :src="user.avatar"
                                         :alt="user.name"
                                     />
-                                    <AvatarFallback class="bg-primary/10 text-primary">
+                                    <AvatarFallback class="bg-primary/10 text-primary text-sm">
                                         {{ user.name?.charAt(0).toUpperCase() }}
                                     </AvatarFallback>
                                 </Avatar>
@@ -465,7 +428,7 @@ const user = computed(() => page.props.auth?.user)
                         as-child
                         variant="outline"
                         size="sm"
-                        class="hidden lg:flex"
+                        class="hidden lg:flex h-10"
                     >
                         <Link href="/login">Member Login</Link>
                     </Button>
