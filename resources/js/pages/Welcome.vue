@@ -486,6 +486,7 @@ const isLive = computed(() => {
         <section class="py-16 lg:py-20 bg-gradient-to-r from-blue-50 via-white to-primary/10">
             <div class="container mx-auto px-4">
                 <div class="grid lg:grid-cols-2 gap-8">
+                    <!-- Left side remains the same -->
                     <div class="space-y-6">
                         <div class="inline-flex items-center rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
                             <MapPin class="mr-2 h-4 w-4" />
@@ -539,44 +540,85 @@ const isLive = computed(() => {
                         </div>
                     </div>
 
+                    <!-- Right side - Contact Form -->
                     <div class="bg-white rounded-2xl shadow-lg p-8 border border-primary/10">
-                        <h3 class="text-2xl font-bold mb-4">Support Our Mission</h3>
-                        <p class="text-muted-foreground mb-6">
-                            Your support enables us to continue empowering communities through our
-                            S.E.E. model. Every contribution makes a difference.
-                        </p>
-                        <div class="space-y-4 mb-8">
-                            <div class="flex items-center gap-3">
-                                <div class="h-6 w-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                                    <CheckIcon class="h-3 w-3 text-green-600" />
+                        <h3 class="text-2xl font-bold mb-6">Send Us a Message</h3>
+
+                        <form class="space-y-6" action="/api/contact" method="POST">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label for="firstName" class="text-sm font-medium">First Name *</label>
+                                    <input
+                                        type="text"
+                                        id="firstName"
+                                        name="firstName"
+                                        required
+                                        class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition"
+                                        placeholder="John"
+                                    >
                                 </div>
-                                <span class="text-sm">UK Registered Charity (1141696)</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <div class="h-6 w-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                                    <CheckIcon class="h-3 w-3 text-green-600" />
+                                <div class="space-y-2">
+                                    <label for="lastName" class="text-sm font-medium">Last Name *</label>
+                                    <input
+                                        type="text"
+                                        id="lastName"
+                                        name="lastName"
+                                        required
+                                        class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition"
+                                        placeholder="Doe"
+                                    >
                                 </div>
-                                <span class="text-sm">Gift Aid Registered</span>
                             </div>
-                            <div class="flex items-center gap-3">
-                                <div class="h-6 w-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                                    <CheckIcon class="h-3 w-3 text-green-600" />
+
+                            <div class="space-y-2">
+                                <label for="email" class="text-sm font-medium">Email Address *</label>
+                                <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    required
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition"
+                                    placeholder="john@example.com"
+                                >
+                            </div>
+
+
+
+                            <div class="space-y-2">
+                                <label for="message" class="text-sm font-medium">Message *</label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    required
+                                    rows="3"
+                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition resize-none"
+                                    placeholder="Tell us how we can help you..."
+                                ></textarea>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-3">
+                                    <input
+                                        type="checkbox"
+                                        id="newsletter"
+                                        name="newsletter"
+                                        class="mt-1 h-4 w-4 text-primary rounded focus:ring-primary/20"
+                                    >
+                                    <label for="newsletter" class="text-sm text-muted-foreground">
+                                        I'd like to receive updates about charity news and upcoming events
+                                    </label>
                                 </div>
-                                <span class="text-sm">Financial Transparency</span>
+
+                                <p class="text-xs text-muted-foreground">
+                                    By submitting this form, you agree to our privacy policy and consent to
+                                    being contacted regarding your inquiry.
+                                </p>
                             </div>
-                            <div class="flex items-center gap-3">
-                                <div class="h-6 w-6 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
-                                    <CheckIcon class="h-3 w-3 text-green-600" />
-                                </div>
-                                <span class="text-sm">Impact Reports Available</span>
-                            </div>
-                        </div>
-                        <Button as-child class="w-full bg-primary hover:bg-primary/90">
-                            <Link href="/donate" class="flex items-center justify-center gap-2">
-                                <Heart class="h-5 w-5" />
-                                Make a Donation
-                            </Link>
-                        </Button>
+
+                            <Button type="submit" class="w-full bg-primary hover:bg-primary/90 py-3 text-base">
+                                Send Message
+                            </Button>
+                        </form>
                     </div>
                 </div>
             </div>
