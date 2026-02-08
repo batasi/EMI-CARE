@@ -517,9 +517,8 @@ const isLive = computed(() => {
                             <div class="flex items-center gap-3">
                                 <Globe class="h-5 w-5 text-primary flex-shrink-0" />
                                 <div>
-                                    <p class="font-medium">Email & Website</p>
+                                    <p class="font-medium">Email </p>
                                     <p class="text-sm text-muted-foreground">{{ charityInfo.email }}</p>
-                                    <p class="text-sm text-muted-foreground">{{ charityInfo.website }}</p>
                                 </div>
                             </div>
                         </div>
