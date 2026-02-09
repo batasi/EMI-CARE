@@ -330,42 +330,28 @@ const user = computed(() => page.props.auth?.user)
                             <template v-if="item.children">
                                 <NavigationMenuTrigger
                                     :class="[
-                                        'h-12 px-4 text-sm font-medium transition-all duration-200 hover:text-primary data-[state=open]:text-primary data-[state=open]:bg-primary/10',
+                                        'h-12 px-4 text-md  font-medium transition-all duration-200 bg-green-500 hover:text-primary data-[state=open]:text-primary data-[state=open]:bg-primary/10',
                                         isCurrentUrl(item.href) ? activeItemStyles : 'hover:bg-accent'
                                     ]"
                                 >
                                     {{ item.title }}
                                 </NavigationMenuTrigger>
-                                <NavigationMenuContent class="bg-background dark:bg-gray-900 border-border shadow-lg">
+                                <NavigationMenuContent class="bg-green-500">
                                     <ul class="grid w-[400px] gap-3 p-4 md:w-[500px] lg:w-[600px]">
-                                        <li class="row-span-3">
-                                            <NavigationMenuLink as-child>
-                                                <Link
-                                                    :href="item.href"
-                                                    class="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/5 p-6 no-underline outline-none focus:shadow-md transition-all hover:scale-[1.02]"
-                                                >
-                                                    <div class="mb-2 mt-4 text-lg font-medium text-foreground">
-                                                        {{ item.title }}
-                                                    </div>
-                                                    <p class="text-sm text-muted-foreground leading-tight">
-                                                        Explore our {{ item.title.toLowerCase() }} initiatives
-                                                    </p>
-                                                </Link>
-                                            </NavigationMenuLink>
-                                        </li>
+
                                         <li
                                             v-for="child in item.children"
                                             :key="child.title"
-                                        >
+                                         >
                                             <NavigationMenuLink as-child>
                                                 <Link
                                                     :href="child.href"
                                                     class="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-all hover:bg-accent hover:text-accent-foreground focus:bg-accent hover:translate-x-1"
                                                 >
-                                                    <div class="text-sm font-medium leading-none text-foreground">
+                                                    <div class="text-lg font-medium leading-none text-primary">
                                                         {{ child.title }}
                                                     </div>
-                                                    <p class="line-clamp-2 text-sm leading-snug text-muted-foreground">
+                                                    <p class="line-clamp-2 text-lg leading-snug text-primary-foreground">
                                                         Discover our {{ child.title.toLowerCase() }} programs
                                                     </p>
                                                 </Link>
@@ -407,7 +393,7 @@ const user = computed(() => page.props.auth?.user)
                     >
                         <Link href="/live" class="flex items-center">
                             <PlayCircle class="h-4 w-4" />
-                            <span class="hidden sm:inline">Live Now</span>
+                            <span class="sm:inline">Live Now</span>
                         </Link>
                     </Button>
                     <Button
