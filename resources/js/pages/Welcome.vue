@@ -2,6 +2,7 @@
 import { Head, Link } from '@inertiajs/vue3'
 import { Heart, BookOpen, Globe, Phone, MapPin, Users, Calendar, Clock, Shield, GraduationCap, HandHeart, Building, ArrowRight, ChevronRight } from 'lucide-vue-next'
 import { computed } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
@@ -14,7 +15,56 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: '/',
     },
 ];
+// Carousel state
+const activeImage = ref(0)
+const totalImages = 4
+let autoPlayInterval: ReturnType<typeof setInterval> | null = null
 
+// Navigation methods
+const nextImage = () => {
+    activeImage.value = (activeImage.value + 1) % totalImages
+}
+
+const prevImage = () => {
+    activeImage.value = (activeImage.value - 1 + totalImages) % totalImages
+}
+
+// Auto-play functionality
+const startAutoPlay = () => {
+    autoPlayInterval = setInterval(() => {
+        nextImage()
+    }, 5000) // Change image every 5 seconds
+}
+
+const stopAutoPlay = () => {
+    if (autoPlayInterval) {
+        clearInterval(autoPlayInterval)
+        autoPlayInterval = null
+    }
+}
+
+// Initialize auto-play on mount
+onMounted(() => {
+    startAutoPlay()
+})
+
+// Clean up on unmount
+onBeforeUnmount(() => {
+    stopAutoPlay()
+})
+
+// Optional: Pause on hover
+const carouselHover = ref(false)
+
+const handleMouseEnter = () => {
+    carouselHover.value = true
+    stopAutoPlay()
+}
+
+const handleMouseLeave = () => {
+    carouselHover.value = false
+    startAutoPlay()
+}
 // Charity information based on provided data
 const charityInfo = {
     name: 'Empowerment Missions International',
@@ -137,41 +187,7 @@ const latestUpdates = [
     }
 ]
 
-// Quick action cards
-const quickActions = [
-    {
-        title: 'Make a Donation',
-        description: 'Support our empowerment programs and relief efforts',
-        icon: Heart,
-        href: '/donate',
-        color: 'text-red-500',
-        bgColor: 'bg-red-50'
-    },
-    {
-        title: 'Request Support',
-        description: 'Apply for grants or request assistance',
-        icon: HandHeart,
-        href: '/support',
-        color: 'text-blue-500',
-        bgColor: 'bg-blue-50'
-    },
-    {
-        title: 'Volunteer',
-        description: 'Join our team and make a difference',
-        icon: Users,
-        href: '/volunteer',
-        color: 'text-green-500',
-        bgColor: 'bg-green-50'
-    },
-    {
-        title: 'Prayer Request',
-        description: 'Share your prayer needs with us',
-        icon: BookOpen,
-        href: '/prayer-request',
-        color: 'text-purple-500',
-        bgColor: 'bg-purple-50'
-    }
-]
+
 
 // Check if live stream is active
 const isLive = computed(() => {
@@ -248,31 +264,123 @@ const isLive = computed(() => {
                         </div>
                     </div>
 
-                    <!-- Right Content - Quick Actions -->
-                    <div class="grid grid-cols-2 gap-6">
-                        <Card
-                            v-for="action in quickActions"
-                            :key="action.title"
-                            class="group hover:shadow-lg transition-all duration-300 border-primary/10 hover:border-primary/30 cursor-pointer"
-                            @click="$inertia.visit(action.href)"
-                        >
-                            <CardHeader class="pb-3">
-                                <div class="flex items-center justify-between">
-                                    <div :class="[action.bgColor, 'p-3 rounded-lg']">
-                                        <component :is="action.icon" :class="[action.color, 'h-6 w-6']" />
+                    <!-- Right Content - Image Carousel -->
+                    <div class="relative" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                            <!-- Carousel Container -->
+                            <div class="relative h-[500px] overflow-hidden">
+                                <!-- Carousel Images -->
+                                <div class="relative h-full">
+                                    <!-- Image 1 - Community Gathering -->
+                                    <div class="absolute inset-0 transition-opacity duration-700 ease-in-out" :class="{ 'opacity-100': activeImage === 0, 'opacity-0': activeImage !== 0 }">
+                                        <img
+                                            src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                                            alt="Community prayer gathering and fellowship"
+                                            class="w-full h-full object-cover"
+                                        />
+                                        <!-- Image Overlay -->
+                                        <div class="absolute inset-0 bg-gradient-to-t from-primary/40 via-primary/20 to-transparent"></div>
+                                        <!-- Caption -->
+                                        <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                                            <h3 class="text-xl font-bold mb-2">Community Fellowship</h3>
+                                            <p class="text-sm opacity-90">Bringing people together through faith and support</p>
+                                        </div>
                                     </div>
-                                    <ArrowRight class="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+
+                                    <!-- Image 2 - Education Support -->
+                                    <div class="absolute inset-0 transition-opacity duration-700 ease-in-out" :class="{ 'opacity-100': activeImage === 1, 'opacity-0': activeImage !== 1 }">
+                                        <img
+                                            src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                                            alt="Educational support and school programs"
+                                            class="w-full h-full object-cover"
+                                        />
+                                        <div class="absolute inset-0 bg-gradient-to-t from-blue-600/40 via-blue-600/20 to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                                            <h3 class="text-xl font-bold mb-2">Educational Empowerment</h3>
+                                            <p class="text-sm opacity-90">Supporting students with grants and learning materials</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Image 3 - Economic Development -->
+                                    <div class="absolute inset-0 transition-opacity duration-700 ease-in-out" :class="{ 'opacity-100': activeImage === 2, 'opacity-0': activeImage !== 2 }">
+                                        <img
+                                            src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                                            alt="Economic empowerment and development programs"
+                                            class="w-full h-full object-cover"
+                                        />
+                                        <div class="absolute inset-0 bg-gradient-to-t from-green-600/40 via-green-600/20 to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                                            <h3 class="text-xl font-bold mb-2">Economic Growth</h3>
+                                            <p class="text-sm opacity-90">Empowering communities through sustainable initiatives</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Image 4 - Outreach Programs -->
+                                    <div class="absolute inset-0 transition-opacity duration-700 ease-in-out" :class="{ 'opacity-100': activeImage === 3, 'opacity-0': activeImage !== 3 }">
+                                        <img
+                                            src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                                            alt="Charity outreach and support programs"
+                                            class="w-full h-full object-cover"
+                                        />
+                                        <div class="absolute inset-0 bg-gradient-to-t from-purple-600/40 via-purple-600/20 to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                                            <h3 class="text-xl font-bold mb-2">Outreach Programs</h3>
+                                            <p class="text-sm opacity-90">Making a difference in communities across UK and Africa</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <CardTitle class="mt-4 group-hover:text-primary transition-colors">
-                                    {{ action.title }}
-                                </CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                                <p class="text-sm text-muted-foreground">
-                                    {{ action.description }}
-                                </p>
-                            </CardContent>
-                        </Card>
+
+                                <!-- Navigation Buttons -->
+                                <button
+                                    @click="prevImage"
+                                    class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-2 rounded-full transition-all duration-300"
+                                >
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                </button>
+                                <button
+                                    @click="nextImage"
+                                    class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-2 rounded-full transition-all duration-300"
+                                >
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </button>
+
+                                <!-- Indicators -->
+                                <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+                                    <button
+                                        v-for="index in 4"
+                                        :key="index"
+                                        @click="activeImage = index - 1"
+                                        class="w-3 h-3 rounded-full transition-all duration-300"
+                                        :class="activeImage === index - 1 ? 'bg-white w-8' : 'bg-white/50 hover:bg-white/70'"
+                                        :aria-label="`Go to slide ${index}`"
+                                    ></button>
+                                </div>
+
+                                <!-- Auto-play indicator -->
+                                <div class="absolute top-4 right-4 flex items-center gap-2 bg-black/30 backdrop-blur-sm text-white text-xs px-3 py-1 rounded-full">
+                                    <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                    <span>Carousel</span>
+                                </div>
+                            </div>
+
+                            <!-- Quick Stats Overlay -->
+                            <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-white rounded-xl shadow-xl p-6 w-4/5 max-w-sm border border-primary/10">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold text-primary">2011</div>
+                                        <div class="text-xs text-muted-foreground">Serving Since</div>
+                                    </div>
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold text-primary">2</div>
+                                        <div class="text-xs text-muted-foreground">Countries</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
