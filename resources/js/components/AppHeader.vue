@@ -156,19 +156,7 @@ const user = computed(() => page.props.auth?.user)
 
 <template>
     <div class="sticky top-0 z-50 w-full border-b bg-green-500 backdrop-blur-lg supports-[backdrop-filter]:bg-green-500 dark:border-gray-800">
-        <!-- Announcement Bar -->
-        <div class="border-t bg-gradient-to-r from-primary/10 via-accent/5 to-secondary/10 py-2 dark:from-primary/20 dark:via-accent/10 dark:to-secondary/20">
-            <div class="container mx-auto px-4">
-                <div class="flex flex-col sm:flex-row items-center justify-center text-sm gap-2 sm:gap-0">
-                    <div class="flex items-center gap-2">
-                        <Shield class="h-4 w-4 text-primary" />
-                        <span class="font-medium">UK Registered Charity No: 1141696</span>
-                    </div>
-                    <span class="hidden sm:inline mx-2 text-gray-500">•</span>
-                    <span class="text-center">Empowering Communities in the UK & Africa</span>
-                </div>
-            </div>
-        </div>
+
 
         <div class="container mx-auto flex h-16 lg:h-20 items-center px-4">
             <!-- Mobile Menu Trigger -->
@@ -526,6 +514,19 @@ const user = computed(() => page.props.auth?.user)
                         <Link href="/login">Login</Link>
                     </Button>
                 </template>
+            </div>
+        </div>
+        <!-- Announcement Bar -->
+        <div class="border-t bg-gradient-to-r from-primary-foreground via-primary-foreground to-primary-foreground py-2 dark:from-primary/20 dark:via-accent/10 dark:to-secondary/20">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col sm:flex-row items-center justify-center text-sm gap-2 sm:gap-0">
+                    <div class="flex items-center gap-2">
+                        <Shield class="h-4 w-4 text-primary" />
+                        <span class="font-medium">UK Registered Charity No: 1141696</span>
+                    </div>
+                    <span class="hidden sm:inline mx-2 text-gray-500">•</span>
+                    <span class="text-center">Empowering Communities in the UK & Africa</span>
+                </div>
             </div>
         </div>
     </div>
