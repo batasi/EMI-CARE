@@ -67,7 +67,7 @@ const handleMouseLeave = () => {
 }
 // Charity information based on provided data
 const charityInfo = {
-    name: 'Empowerment Missions International',
+    name: 'Empowerment Missions Int.',
     charityNumber: '1141696',
     companyNumber: '05893970',
     tagline: 'Empowering People - Socio-spiritually, Economically & Educationally',
@@ -199,26 +199,26 @@ const isLive = computed(() => {
 </script>
 
 <template>
-    <Head title="Welcome to Empowerment Missions International" />
+    <Head title="Empowerment Missions Int." />
 
     <FrontAppLayout :breadcrumbs="breadcrumbs" :is-live="isLive">
         <!-- Hero Section -->
-        <section class="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-primary/10">
+        <section class="relative overflow-hidden bg-green-100 from-blue-50 via-white to-primary/10">
             <div class="absolute inset-0 bg-grid-black/[0.02] bg-[size:20px_20px]" />
 
             <!-- Decorative elements -->
-            <div class="absolute top-0 right-0 w-72 h-72 bg-primary/5 rounded-full -translate-y-36 translate-x-36" />
-            <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-50 rounded-full translate-y-48 -translate-x-48" />
+            <div class="absolute top-0 right-0 w-72 h-72 bg-green-500 rounded-full -translate-y-36 translate-x-36" />
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-green-500 rounded-full translate-y-48 -translate-x-48" />
 
             <div class="container relative mx-auto px-4 py-16 ">
                 <div class="grid lg:grid-cols-2 gap-12 items-center">
                     <!-- Left Content -->
-                    <div class="space-y-8">
+                    <div class="space-y-4">
 
 
                         <h1 class="text-4xl lg:text-5xl xl:text-5xl font-bold tracking-tight leading-tight">
                             Empowering Communities
-                            <span class="text-primary block">Through Faith & Action</span>
+                            <span class="text-green-700 block">Through Faith & Action</span>
                         </h1>
 
                         <p class="text-xl text-muted-foreground">
@@ -246,19 +246,19 @@ const isLive = computed(() => {
                         <!-- Quick Stats -->
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t">
                             <div class="text-center">
-                                <div class="text-2xl font-bold text-primary">2011</div>
+                                <div class="text-2xl font-bold text-green-700">2011</div>
                                 <div class="text-sm text-muted-foreground">Founded</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-2xl font-bold text-primary">UK & Africa</div>
+                                <div class="text-2xl font-bold text-green-700">UK & Africa</div>
                                 <div class="text-sm text-muted-foreground">Areas of Operation</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-2xl font-bold text-primary">S.E.E.</div>
+                                <div class="text-2xl font-bold text-green-700">S.E.E.</div>
                                 <div class="text-sm text-muted-foreground">Empowerment Model</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-2xl font-bold text-primary">2</div>
+                                <div class="text-2xl font-bold text-green-700">2</div>
                                 <div class="text-sm text-muted-foreground">Trustees</div>
                             </div>
                         </div>
@@ -360,60 +360,9 @@ const isLive = computed(() => {
                                     ></button>
                                 </div>
 
-                                <!-- Auto-play indicator -->
-                                <div class="absolute top-4 right-4 flex items-center gap-2 bg-black/30 backdrop-blur-sm text-white text-xs px-3 py-1 rounded-full">
-                                    <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                                    <span>Carousel</span>
-                                </div>
-                            </div>
 
-                            <!-- Quick Stats Overlay -->
-                            <div class="absolute -bottom-6 left-1/2 transform -translate-x-1/2 bg-white rounded-xl shadow-xl p-6 w-4/5 max-w-sm border border-primary/10">
-                                <div class="grid grid-cols-2 gap-4">
-                                    <div class="text-center">
-                                        <div class="text-2xl font-bold text-primary">2011</div>
-                                        <div class="text-xs text-muted-foreground">Serving Since</div>
-                                    </div>
-                                    <div class="text-center">
-                                        <div class="text-2xl font-bold text-primary">2</div>
-                                        <div class="text-xs text-muted-foreground">Countries</div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- S.E.E. Model Section -->
-        <section class="py-16 lg:py-20">
-            <div class="container mx-auto px-4">
-                <div class="text-center mb-12">
-                    <div class="inline-flex items-center rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-4">
-                        <Shield class="mr-2 h-4 w-4" />
-                        Our Empowerment Model
-                    </div>
-                    <h2 class="text-3xl lg:text-4xl font-bold tracking-tight mb-4">The S.E.E. Approach</h2>
-                    <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
-                        We empower communities through three interconnected pillars of transformation
-                    </p>
-                </div>
-
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div
-                        v-for="pillar in seeModel"
-                        :key="pillar.title"
-                        class="group text-center p-8 rounded-2xl border border-gray-200 hover:border-primary/30 hover:shadow-lg transition-all duration-300"
-                    >
-                        <div :class="[pillar.bgColor, 'inline-flex p-4 rounded-xl mb-6']">
-                            <component :is="pillar.icon" :class="[pillar.color, 'h-8 w-8']" />
-                        </div>
-                        <h3 class="text-xl font-bold mb-3">{{ pillar.title }}</h3>
-                        <p class="text-muted-foreground mb-6">
-                            {{ pillar.description }}
-                        </p>
-                        <div class="h-1 w-12 bg-primary mx-auto opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </div>
                 </div>
             </div>
@@ -432,10 +381,6 @@ const isLive = computed(() => {
                     </div>
 
                     <div class="space-y-6">
-                        <div class="inline-flex items-center rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
-                            <Building class="mr-2 h-4 w-4" />
-                            Our Charitable Activities
-                        </div>
 
                         <h2 class="text-3xl lg:text-4xl font-bold tracking-tight">
                             Making a Difference Across Communities
@@ -473,6 +418,39 @@ const isLive = computed(() => {
                                 <ArrowRight class="h-4 w-4" />
                             </Link>
                         </Button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- S.E.E. Model Section -->
+        <section class="py-16 lg:py-20">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <div class="inline-flex items-center rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-4">
+                        <Shield class="mr-2 h-4 w-4" />
+                        Our Empowerment Model
+                    </div>
+                    <h2 class="text-3xl lg:text-4xl font-bold tracking-tight mb-4">The S.E.E. Approach</h2>
+                    <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+                        We empower communities through three interconnected pillars of transformation
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div
+                        v-for="pillar in seeModel"
+                        :key="pillar.title"
+                        class="group text-center p-8 rounded-2xl border border-gray-200 hover:border-primary/30 hover:shadow-lg transition-all duration-300"
+                    >
+                        <div :class="[pillar.bgColor, 'inline-flex p-4 rounded-xl mb-6']">
+                            <component :is="pillar.icon" :class="[pillar.color, 'h-8 w-8']" />
+                        </div>
+                        <h3 class="text-xl font-bold mb-3">{{ pillar.title }}</h3>
+                        <p class="text-muted-foreground mb-6">
+                            {{ pillar.description }}
+                        </p>
+                        <div class="h-1 w-12 bg-primary mx-auto opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </div>
                 </div>
             </div>
