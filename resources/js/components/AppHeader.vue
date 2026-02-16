@@ -319,13 +319,13 @@ const user = computed(() => page.props.auth?.user)
                                 <NavigationMenuTrigger
                                     :class="[
                                         'h-12 px-4 text-md  font-medium transition-all duration-200 bg-green-500 hover:text-primary data-[state=open]:text-primary data-[state=open]:bg-primary/10',
-                                        isCurrentUrl(item.href) ? activeItemStyles : 'hover:bg-accent'
+                                        isCurrentUrl(item.href) ? activeItemStyles : 'hover:bg-green-600'
                                     ]"
                                 >
                                     {{ item.title }}
                                 </NavigationMenuTrigger>
-                                <NavigationMenuContent class="bg-green-500">
-                                    <ul class="grid w-[400px] gap-3 p-4 md:w-[500px] lg:w-[600px]">
+                                <NavigationMenuContent class="bg-green-200">
+                                    <ul class="grid w-[300px] gap-3 p-4 md:w-[500px] lg:w-[300px]">
 
                                         <li
                                             v-for="child in item.children"
@@ -334,14 +334,12 @@ const user = computed(() => page.props.auth?.user)
                                             <NavigationMenuLink as-child>
                                                 <Link
                                                     :href="child.href"
-                                                    class="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-all hover:bg-accent hover:text-accent-foreground focus:bg-accent hover:translate-x-1"
+                                                    class="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-all hover:bg-green-600 hover:text-primary focus:bg-green-600 hover:translate-x-1"
                                                 >
                                                     <div class="text-lg font-medium leading-none text-primary">
-                                                        {{ child.title }}
+                                                       {{ child.title }}
                                                     </div>
-                                                    <p class="line-clamp-2 text-lg leading-snug text-primary-foreground">
-                                                        Discover our {{ child.title.toLowerCase() }} programs
-                                                    </p>
+
                                                 </Link>
                                             </NavigationMenuLink>
                                         </li>
@@ -352,7 +350,7 @@ const user = computed(() => page.props.auth?.user)
                                 <Link
                                     :class="[
                                         navigationMenuTriggerStyle(),
-                                        'h-12 px-4 text-sm font-medium cursor-pointer transition-all duration-200 hover:text-primary hover:bg-accent',
+                                        'h-12 px-4 text-sm font-medium cursor-pointer transition-all duration-200 hover:text-primary hover:bg-green-600',
                                         isCurrentUrl(item.href) ? activeItemStyles : ''
                                     ]"
                                     :href="item.href"
@@ -405,7 +403,7 @@ const user = computed(() => page.props.auth?.user)
                                     variant="ghost"
                                     size="icon"
                                     as-child
-                                    class="h-10 w-10 relative hover:bg-accent"
+                                    class="h-10 w-10 relative hover:bg-green-600"
                                 >
                                     <Link :href="action.href">
                                         <span class="sr-only">{{ action.title }}</span>
