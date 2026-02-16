@@ -197,7 +197,41 @@ const isLive = computed(() => {
     return day === 0 && hour >= 9 && hour <= 12 // Sunday 9am-12pm
 })
 </script>
+<style scoped>
+@keyframes float-slow {
+    0%, 100% { transform: translateY(0px) translateX(0px); }
+    33% { transform: translateY(-20px) translateX(10px); }
+    66% { transform: translateY(10px) translateX(-10px); }
+}
 
+@keyframes float-slower {
+    0%, 100% { transform: translateY(0px) translateX(0px); }
+    25% { transform: translateY(15px) translateX(-15px); }
+    75% { transform: translateY(-15px) translateX(15px); }
+}
+
+@keyframes pulse-soft {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.1); }
+}
+
+.animate-float-slow {
+    animation: float-slow 8s ease-in-out infinite;
+}
+
+.animate-float-slower {
+    animation: float-slower 12s ease-in-out infinite;
+}
+
+.animate-pulse-soft {
+    animation: pulse-soft 6s ease-in-out infinite;
+}
+
+.bg-grid-black\/\[0\.02\] {
+    background-image: linear-gradient(to right, rgb(0 0 0 / 0.02) 1px, transparent 1px),
+        linear-gradient(to bottom, rgb(0 0 0 / 0.02) 1px, transparent 1px);
+}
+</style>
 <template>
     <Head title="Empowerment Missions Int." />
 
@@ -424,33 +458,145 @@ const isLive = computed(() => {
         </section>
 
         <!-- S.E.E. Model Section -->
-        <section class="py-16 lg:py-20">
-            <div class="container mx-auto px-4">
-                <div class="text-center mb-12">
-                    <div class="inline-flex items-center rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary mb-4">
-                        <Shield class="mr-2 h-4 w-4" />
-                        Our Empowerment Model
+        <section class="relative bg-green-100 overflow-hidden">
+            <!-- Main background with gradient and pattern -->
+
+            <!-- Abstract pattern overlay -->
+            <div class="absolute inset-0 opacity-30">
+                <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, rgb(0 0 0 / 0.05) 1px, transparent 0); background-size: 40px 40px;"></div>
+            </div>
+
+            <!-- Layered geometric shapes -->
+            <div class="absolute inset-0 overflow-hidden">
+                <!-- Large floating shapes -->
+                <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
+
+                <!-- Diagonal lines pattern -->
+                <div class="absolute inset-0 opacity-[0.02]" style="background-image: repeating-linear-gradient(45deg, #000 0px, #000 2px, transparent 2px, transparent 20px);"></div>
+
+                <!-- Floating orbs with different colors -->
+                <div class="absolute top-20 left-10 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl animate-float-slow"></div>
+                <div class="absolute bottom-20 right-10 w-80 h-80 bg-emerald-500/5 rounded-full blur-3xl animate-float-slower"></div>
+                <div class="absolute top-1/2 left-1/3 w-96 h-96 bg-rose-500/5 rounded-full blur-3xl animate-pulse-soft"></div>
+
+                <!-- Scattered dots -->
+                <div class="absolute top-1/4 right-1/4 w-2 h-2 bg-primary/20 rounded-full"></div>
+                <div class="absolute bottom-1/3 left-1/4 w-3 h-3 bg-blue-400/20 rounded-full"></div>
+                <div class="absolute top-2/3 right-1/3 w-1.5 h-1.5 bg-green-400/20 rounded-full"></div>
+            </div>
+
+            <!-- Subtle grid overlay -->
+            <div class="absolute inset-0 bg-grid-black/[0.02] bg-[size:30px_30px]" />
+
+            <div class="container relative mx-auto">
+                <!-- Section Header (same as before) -->
+                <div class="text-center max-w-3xl mx-auto mb-2">
+                    <div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full text-primary text-sm font-medium mb-6 border border-primary/20 shadow-sm">
+                        <Shield class="h-4 w-4" />
+                        <span>How We Transform Lives</span>
                     </div>
-                    <h2 class="text-3xl lg:text-4xl font-bold tracking-tight mb-4">The S.E.E. Approach</h2>
-                    <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
-                        We empower communities through three interconnected pillars of transformation
+
+                    <h2 class="text-4xl lg:text-5xl font-bold tracking-tight mb-4">
+                        The <span class="text-primary">S.E.E.</span> Approach
+                    </h2>
+
+                    <p class="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+                        Three interconnected pillars working together to create lasting transformation
+                        in communities across the UK and Africa
                     </p>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-8">
+                <!-- Interactive Pillars Display (same as before) -->
+                <div class="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                     <div
-                        v-for="pillar in seeModel"
+                        v-for="(pillar, index) in seeModel"
                         :key="pillar.title"
-                        class="group text-center p-8 rounded-2xl border border-gray-200 hover:border-primary/30 hover:shadow-lg transition-all duration-300"
+                        class="group relative"
                     >
-                        <div :class="[pillar.bgColor, 'inline-flex p-4 rounded-xl mb-6']">
-                            <component :is="pillar.icon" :class="[pillar.color, 'h-8 w-8']" />
+                        <!-- Connection Lines (only visible on desktop) -->
+                        <div
+                            v-if="index < seeModel.length - 1"
+                            class="hidden lg:block absolute top-1/3 -right-8 w-16 h-[2px] bg-gradient-to-r from-primary/20 to-primary/40 z-10"
+                        >
+                            <div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-primary/40 rounded-full"></div>
                         </div>
-                        <h3 class="text-xl font-bold mb-3">{{ pillar.title }}</h3>
-                        <p class="text-muted-foreground mb-6">
-                            {{ pillar.description }}
-                        </p>
-                        <div class="h-1 w-12 bg-primary mx-auto opacity-0 group-hover:opacity-100 transition-opacity"></div>
+
+                        <!-- Main Card with glass effect -->
+                        <div class="relative bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white/50 overflow-hidden h-full">
+                            <!-- Card background gradient on hover -->
+                            <div
+                                class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
+                                :class="[
+                                    pillar.title === 'Socio-Spiritual' ? 'bg-gradient-to-br from-rose-100/50 via-white to-amber-100/50' :
+                                    pillar.title === 'Economic' ? 'bg-gradient-to-br from-emerald-100/50 via-white to-teal-100/50' :
+                                    'bg-gradient-to-br from-blue-100/50 via-white to-indigo-100/50'
+                                ]"
+                            ></div>
+
+                            <!-- Content (same as before) -->
+                            <div class="relative">
+                                <!-- Icon with animated ring -->
+                                <div class="relative inline-block mb-6">
+                                    <div
+                                        class="absolute inset-0 rounded-2xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-500"
+                                        :class="pillar.bgColor"
+                                    ></div>
+                                    <div
+                                        class="relative p-4 rounded-2xl transition-all duration-500 group-hover:scale-110 group-hover:rotate-3"
+                                        :class="pillar.bgColor"
+                                    >
+                                        <component :is="pillar.icon" :class="[pillar.color, 'h-8 w-8']" />
+                                    </div>
+                                </div>
+
+                                <h3 class="text-2xl font-bold mb-3 group-hover:text-primary transition-colors">
+                                    {{ pillar.title }}
+                                </h3>
+
+                                <p class="text-muted-foreground mb-8 leading-relaxed">
+                                    {{ pillar.description }}
+                                </p>
+
+                                <!-- Impact Metrics -->
+                                <div class="space-y-4">
+                                    <div class="flex items-center gap-3 text-sm">
+                                        <div class="w-2 h-2 rounded-full" :class="pillar.color.replace('text', 'bg')"></div>
+                                        <span class="text-muted-foreground">Active in UK & Kenya</span>
+                                    </div>
+                                    <div class="flex items-center gap-3 text-sm">
+                                        <div class="w-2 h-2 rounded-full" :class="pillar.color.replace('text', 'bg')"></div>
+                                        <span class="text-muted-foreground">Regular community programs</span>
+                                    </div>
+                                    <div class="flex items-center gap-3 text-sm">
+                                        <div class="w-2 h-2 rounded-full" :class="pillar.color.replace('text', 'bg')"></div>
+                                        <span class="text-muted-foreground">Measurable impact tracking</span>
+                                    </div>
+                                </div>
+
+                                <!-- Decorative element -->
+                                <div class="absolute bottom-0 right-0 opacity-5 group-hover:opacity-10 transition-opacity">
+                                    <component :is="pillar.icon" class="h-24 w-24" :class="pillar.color" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom Quote with enhanced styling -->
+                <div class="text-center mt-16 max-w-2xl mx-auto relative">
+                    <!-- Decorative quote marks -->
+                    <div class="absolute -top-6 left-0 text-6xl text-primary/10 font-serif">"</div>
+                    <div class="absolute -bottom-6 right-0 text-6xl text-primary/10 font-serif">"</div>
+
+                    <p class="text-lg text-muted-foreground italic relative z-10 px-8">
+                        "Together, these three pillars create a foundation for sustainable community development
+                        and lasting positive change."
+                    </p>
+
+                    <!-- Quick stats with better styling -->
+                    <div class="flex justify-center gap-8 mt-10 pt-6 border-t border-primary/10">
+
                     </div>
                 </div>
             </div>
@@ -711,3 +857,4 @@ const isLive = computed(() => {
         </section>
     </FrontAppLayout>
 </template>
+
