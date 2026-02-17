@@ -16,10 +16,18 @@ export function updateTheme(value: Appearance): void {
     }
 
     if (value === 'system') {
-        // Always force light mode even if system prefers dark
-        document.documentElement.classList.remove('dark');
-    }
+        const mediaQueryList = window.matchMedia(
+            '(prefers-color-scheme: dark)',
+        );
+        const systemTheme = mediaQueryList.matches ? 'dark' : 'light';
 
+        document.documentElement.classList.toggle(
+            'dark',
+            systemTheme === 'dark',
+        );
+    } else {
+        document.documentElement.classList.toggle('dark', value === 'dark');
+    }
 }
 
 const setCookie = (name: string, value: string, days = 365) => {
