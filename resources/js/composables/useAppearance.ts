@@ -11,24 +11,15 @@ export type UseAppearanceReturn = {
 };
 
 export function updateTheme(value: Appearance): void {
-    if (typeof window === 'undefined') {
-        return;
-    }
+    if (typeof window === 'undefined') return;
 
-    if (value === 'system') {
-        const mediaQueryList = window.matchMedia(
-            '(prefers-color-scheme: dark)',
-        );
-        const systemTheme = mediaQueryList.matches ? 'dark' : 'light';
+    document.documentElement.classList.remove('dark');
 
-        document.documentElement.classList.toggle(
-            'dark',
-            systemTheme === 'dark',
-        );
-    } else {
-        document.documentElement.classList.toggle('dark', value === 'dark');
+    if (value === 'dark') {
+        document.documentElement.classList.add('dark');
     }
 }
+
 
 const setCookie = (name: string, value: string, days = 365) => {
     if (typeof document === 'undefined') {
