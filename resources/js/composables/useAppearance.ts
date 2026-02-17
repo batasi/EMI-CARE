@@ -11,15 +11,24 @@ export type UseAppearanceReturn = {
 };
 
 export function updateTheme(value: Appearance): void {
-    if (typeof window === 'undefined') return;
+    if (typeof window === 'undefined') {
+        return;
+    }
 
-    document.documentElement.classList.remove('dark');
+    if (value === 'system') {
+        const mediaQueryList = window.matchMedia(
+            '(prefers-color-scheme: dark)',
+        );
+        const systemTheme = mediaQueryList.matches ? 'dark' : 'light';
 
-    if (value === 'dark') {
-        document.documentElement.classList.add('dark');
+        document.documentElement.classList.toggle(
+            'dark',
+            systemTheme === 'dark',
+        );
+    } else {
+        document.documentElement.classList.toggle('dark', value === 'dark');
     }
 }
-
 
 const setCookie = (name: string, value: string, days = 365) => {
     if (typeof document === 'undefined') {
@@ -68,13 +77,14 @@ export function initializeTheme(): void {
 
     // Initialize theme from saved preference or default to system...
     const savedAppearance = getStoredAppearance();
-    updateTheme(savedAppearance || 'system');
+    updateTheme(savedAppearance || 'light');
+
 
     // Set up system theme change listener...
     mediaQuery()?.addEventListener('change', handleSystemThemeChange);
 }
 
-const appearance = ref<Appearance>('system');
+const appearance = ref<Appearance>('light');
 
 export function useAppearance(): UseAppearanceReturn {
     onMounted(() => {
