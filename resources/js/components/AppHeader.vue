@@ -167,14 +167,17 @@ const user = computed(() => page.props.auth?.user)
                             <Menu class="h-5 w-5" />
                         </Button>
                     </SheetTrigger>
-                    <SheetContent side="left" class="w-[320px] sm:w-[400px] p-6 overflow-y-auto bg-background dark:bg-gray-900">
+                    <SheetContent side="left" class="w-[320px] sm:w-[400px] p-6 overflow-y-auto bg-green-100 dark:bg-green-100">
                         <SheetTitle class="sr-only">Navigation Menu</SheetTitle>
                         <SheetHeader class="flex justify-start text-left mb-8">
                             <div class="flex items-center gap-x-3">
-                                <AppLogoIcon class="size-10 fill-current text-primary" />
-                                <div>
-                                    <div class="font-bold text-xl tracking-tight text-foreground">{{ churchName }}</div>
+                                <div class="relative">
+                                    <AppLogoIcon
+                                        class="w-auto h-20 sm:h-20 lg:h-20 fill-current text-primary transition-transform group-hover:scale-110"
+                                        style="width: auto; max-width: none;"
+                                    />
                                 </div>
+
                             </div>
                         </SheetHeader>
 
