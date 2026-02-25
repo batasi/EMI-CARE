@@ -155,7 +155,7 @@ const user = computed(() => page.props.auth?.user)
 </script>
 
 <template>
-    <div class="sticky top-0 z-50 w-full border-b bg-green-500 backdrop-blur-lg supports-[backdrop-filter]:bg-green-500 dark:border-gray-800">
+    <div class="sticky top-0 z-50 w-full border-b bg-green-100 backdrop-blur-lg supports-[backdrop-filter]:bg-green-100 dark:border-gray-800">
 
 
         <div class="container mx-auto flex h-16 lg:h-20 items-center px-4">
@@ -317,7 +317,7 @@ const user = computed(() => page.props.auth?.user)
                             <template v-if="item.children">
                                 <NavigationMenuTrigger
                                     :class="[
-                                        'h-12 px-4 text-md  font-medium transition-all duration-200 bg-green-500 text-white hover:text-primary data-[state=open]:text-primary data-[state=open]:bg-primary/10',
+                                        'h-12 px-4 text-md  font-medium transition-all duration-200 bg-green-100 text-primary hover:text-primary data-[state=open]:text-primary data-[state=open]:bg-primary/10',
                                         isCurrentUrl(item.href) ? activeItemStyles : 'hover:bg-green-600'
                                     ]"
                                 >
@@ -335,7 +335,7 @@ const user = computed(() => page.props.auth?.user)
                                                     :href="child.href"
                                                     class="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-all hover:bg-green-600 hover:text-primary focus:bg-green-600 hover:translate-x-1"
                                                 >
-                                                    <div class="text-lg font-medium leading-none text-dark">
+                                                    <div class="text-lg font-medium leading-none text-primary">
                                                        {{ child.title }}
                                                     </div>
 
@@ -349,7 +349,7 @@ const user = computed(() => page.props.auth?.user)
                                 <Link
                                     :class="[
                                         navigationMenuTriggerStyle(),
-                                        'h-12 px-4 text-lg font-medium bg-green-500 text-white cursor-pointer transition-all duration-200 hover:text-primary hover:bg-green-600',
+                                        'h-12 px-4 text-lg font-medium bg-green-100 text-primary cursor-pointer transition-all duration-200 hover:text-primary-foreground hover:bg-green-500',
                                         isCurrentUrl(item.href) ? activeItemStyles : ''
                                     ]"
                                     :href="item.href"
@@ -359,7 +359,7 @@ const user = computed(() => page.props.auth?.user)
                             </template>
                             <div
                                 v-if="isCurrentUrl(item.href)"
-                                class="absolute bottom-2 left-0 h-0.5 w-full bg-green-200"
+                                class="absolute bottom-2 left-0 h-0.5 w-full bg-green-500"
                             ></div>
                         </NavigationMenuItem>
                     </NavigationMenuList>
@@ -514,15 +514,15 @@ const user = computed(() => page.props.auth?.user)
             </div>
         </div>
         <!-- Announcement Bar -->
-        <div class="border-t bg-gradient-to-r from-primary-foreground via-primary-foreground to-primary-foreground py-2 dark:from-primary/20 dark:via-accent/10 dark:to-secondary/20">
+        <div class="border-t bg-green-500 py-2 dark:from-primary/20 dark:via-accent/10 dark:to-secondary/20">
             <div class="container mx-auto px-4">
                 <div class="flex flex-col sm:flex-row items-center justify-center text-sm gap-2 sm:gap-0">
                     <div class="flex items-center gap-2">
-                        <Shield class="h-4 w-4 text-primary" />
-                        <span class="font-medium">UK Registered Charity No: 1141696</span>
+                        <Shield class="h-4 w-4 text-primary-foreground" />
+                        <span class="font-medium text-primary-foreground">UK Registered Charity No: 1141696</span>
                     </div>
-                    <span class="hidden sm:inline mx-2 text-gray-500">•</span>
-                    <span class="text-center">Empowering Communities in the UK & Africa</span>
+                    <span class="hidden sm:inline mx-2 text-primary-foreground">•</span>
+                    <span class="text-center text-primary-foreground">Empowering Communities in the UK & Africa</span>
                 </div>
             </div>
         </div>
