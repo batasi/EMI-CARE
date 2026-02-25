@@ -25,7 +25,7 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
 // Admin routes (protected by middleware)
-Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/contact-submissions', [ContactController::class, 'adminIndex'])->name('contact-submissions.index');
     Route::get('/contact-submissions/{submission}', [ContactController::class, 'adminShow'])->name('contact-submissions.show');
     Route::put('/contact-submissions/{submission}', [ContactController::class, 'adminUpdate'])->name('contact-submissions.update');
