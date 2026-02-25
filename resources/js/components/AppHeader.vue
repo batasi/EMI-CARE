@@ -87,7 +87,7 @@ const mainNavItems: NavItemWithExact[] = [
     },
     {
         title: 'Our story',
-        href: '/about/story',
+        href: '/about',
         // children: [
         //     { title: 'Our Story', href: '/about/story' },
         //     { title: 'S.E.E. Model', href: '/about/see-model' },
@@ -98,7 +98,7 @@ const mainNavItems: NavItemWithExact[] = [
     },
     {
         title: 'Our Impact',
-        href: '/work',
+        href: '/impact',
         // children: [
         //     { title: 'Education Support', href: '/work/education' },
         //     { title: 'Economic Empowerment', href: '/work/economic' },
