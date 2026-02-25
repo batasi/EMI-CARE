@@ -86,26 +86,26 @@ const mainNavItems: NavItemWithExact[] = [
         exact: true
     },
     {
-        title: 'About Us',
-        href: '/about',
-        children: [
-            { title: 'Our Story', href: '/about/story' },
-            { title: 'S.E.E. Model', href: '/about/see-model' },
-            { title: 'Leadership', href: '/about/leadership' },
-            { title: 'Annual Reports', href: '/about/reports' },
-            { title: 'Our Policies', href: '/about/policies' }
-        ]
+        title: 'Our story',
+        href: '/about/story',
+        // children: [
+        //     { title: 'Our Story', href: '/about/story' },
+        //     { title: 'S.E.E. Model', href: '/about/see-model' },
+        //     { title: 'Leadership', href: '/about/leadership' },
+        //     { title: 'Annual Reports', href: '/about/reports' },
+        //     { title: 'Our Policies', href: '/about/policies' }
+        // ]
     },
     {
-        title: 'Our Work',
+        title: 'Our Impact',
         href: '/work',
-        children: [
-            { title: 'Education Support', href: '/work/education' },
-            { title: 'Economic Empowerment', href: '/work/economic' },
-            { title: 'Spiritual Growth', href: '/work/spiritual' },
-            { title: 'EMI-Care UK', href: '/work/emi-care' },
-            { title: 'Community Projects', href: '/work/projects' }
-        ]
+        // children: [
+        //     { title: 'Education Support', href: '/work/education' },
+        //     { title: 'Economic Empowerment', href: '/work/economic' },
+        //     { title: 'Spiritual Growth', href: '/work/spiritual' },
+        //     { title: 'EMI-Care UK', href: '/work/emi-care' },
+        //     { title: 'Community Projects', href: '/work/projects' }
+        // ]
     },
     {
         title: 'Get Involved',
@@ -297,13 +297,12 @@ const user = computed(() => page.props.auth?.user)
             <!-- Logo -->
             <Link href="/" class="flex items-center gap-x-2 sm:gap-x-3 lg:gap-x-4 group">
                 <div class="relative">
-                    <AppLogoIcon class="size-8 sm:size-10 lg:size-12 fill-current text-primary transition-transform group-hover:scale-110" />
-                    <div class="absolute -top-1 -right-1 h-3 w-3 bg-accent rounded-full animate-pulse"></div>
+                    <AppLogoIcon
+                        class="w-auto h-18 sm:h-18 lg:h-18 fill-current text-primary transition-transform group-hover:scale-110"
+                        style="width: auto; max-width: none;"
+                    />
                 </div>
-                <div class="hidden xs:block">
-                    <div class="font-bold text-lg sm:text-xl lg:text-2xl tracking-tight text-foreground">{{ churchName }}</div>
 
-                </div>
             </Link>
 
             <!-- Desktop Navigation -->
@@ -318,7 +317,7 @@ const user = computed(() => page.props.auth?.user)
                             <template v-if="item.children">
                                 <NavigationMenuTrigger
                                     :class="[
-                                        'h-12 px-4 text-md  font-medium transition-all duration-200 bg-green-500 hover:text-primary data-[state=open]:text-primary data-[state=open]:bg-primary/10',
+                                        'h-12 px-4 text-md  font-medium transition-all duration-200 bg-green-500 text-white hover:text-primary data-[state=open]:text-primary data-[state=open]:bg-primary/10',
                                         isCurrentUrl(item.href) ? activeItemStyles : 'hover:bg-green-600'
                                     ]"
                                 >
@@ -336,7 +335,7 @@ const user = computed(() => page.props.auth?.user)
                                                     :href="child.href"
                                                     class="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-all hover:bg-green-600 hover:text-primary focus:bg-green-600 hover:translate-x-1"
                                                 >
-                                                    <div class="text-lg font-medium leading-none text-primary">
+                                                    <div class="text-lg font-medium leading-none text-dark">
                                                        {{ child.title }}
                                                     </div>
 
@@ -350,7 +349,7 @@ const user = computed(() => page.props.auth?.user)
                                 <Link
                                     :class="[
                                         navigationMenuTriggerStyle(),
-                                        'h-12 px-4 text-sm font-medium cursor-pointer transition-all duration-200 hover:text-primary hover:bg-green-600',
+                                        'h-12 px-4 text-lg font-medium bg-green-500 text-white cursor-pointer transition-all duration-200 hover:text-primary hover:bg-green-600',
                                         isCurrentUrl(item.href) ? activeItemStyles : ''
                                     ]"
                                     :href="item.href"
@@ -360,7 +359,7 @@ const user = computed(() => page.props.auth?.user)
                             </template>
                             <div
                                 v-if="isCurrentUrl(item.href)"
-                                class="absolute bottom-0 left-0 h-0.5 w-full bg-primary"
+                                class="absolute bottom-2 left-0 h-0.5 w-full bg-green-200"
                             ></div>
                         </NavigationMenuItem>
                     </NavigationMenuList>

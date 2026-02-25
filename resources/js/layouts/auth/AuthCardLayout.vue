@@ -25,9 +25,11 @@ defineProps<{
                 :href="home()"
                 class="flex items-center gap-2 self-center font-medium"
             >
-                <div class="flex h-9 w-9 items-center justify-center">
+
+                  <div class="relative">
                     <AppLogoIcon
-                        class="size-9 fill-current text-black dark:text-white"
+                        class="w-auto h-25 sm:h-25 lg:h-25 fill-current text-primary transition-transform group-hover:scale-110"
+                        style="width: auto; max-width: none;"
                     />
                 </div>
             </Link>
