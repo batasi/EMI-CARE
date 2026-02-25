@@ -2,11 +2,11 @@
 import { Head, Link } from '@inertiajs/vue3'
 import { useForm } from '@inertiajs/vue3'
 import {
-    Phone, Mail, MapPin, Clock, Users,
+    Phone, Mail, MapPin, Clock,
     ArrowRight, CheckCircle, Send,
-    HelpCircle, Shield, Sparkles, Building,
+    HelpCircle, Shield, Building,
     Facebook, Twitter, Instagram, Youtube, Linkedin,
-    ChevronRight, Copy, Check
+    ChevronRight,
 } from 'lucide-vue-next'
 import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
 import { Button } from '@/components/ui/button'
@@ -54,15 +54,7 @@ const submit = () => {
 const showSuccessMessage = ref(false)
 
 // Copy functionality for contact details
-const copiedField = ref<string | null>(null)
 
-const copyToClipboard = (text: string, field: string) => {
-    navigator.clipboard.writeText(text)
-    copiedField.value = field
-    setTimeout(() => {
-        copiedField.value = null
-    }, 2000)
-}
 
 // Carousel state for hero section
 const activeImage = ref(0)
@@ -73,9 +65,6 @@ const nextImage = () => {
     activeImage.value = (activeImage.value + 1) % totalImages
 }
 
-const prevImage = () => {
-    activeImage.value = (activeImage.value - 1 + totalImages) % totalImages
-}
 
 const startAutoPlay = () => {
     autoPlayInterval = setInterval(() => {
@@ -98,17 +87,8 @@ onBeforeUnmount(() => {
     stopAutoPlay()
 })
 
-const carouselHover = ref(false)
 
-const handleMouseEnter = () => {
-    carouselHover.value = true
-    stopAutoPlay()
-}
 
-const handleMouseLeave = () => {
-    carouselHover.value = false
-    startAutoPlay()
-}
 
 // Charity information
 const charityInfo = {
@@ -128,48 +108,6 @@ const charityInfo = {
 }
 
 // Contact methods with enhanced details
-const contactMethods = [
-    {
-        icon: Phone,
-        title: 'Phone',
-        details: [
-            { label: 'Main Line', value: charityInfo.phone, type: 'phone' },
-            { label: 'Emergency', value: '07727208821', type: 'phone' }
-        ],
-        description: 'Available during office hours',
-        action: 'Call us',
-        color: 'from-blue-500 to-cyan-500',
-        bgColor: 'bg-blue-50',
-        textColor: 'text-blue-600'
-    },
-    {
-        icon: Mail,
-        title: 'Email',
-        details: [
-            { label: 'General Inquiries', value: charityInfo.email, type: 'email' },
-            { label: 'Support', value: 'support@empowermentmissions.org.uk', type: 'email' },
-            { label: 'Partnerships', value: 'partners@empowermentmissions.org.uk', type: 'email' }
-        ],
-        description: 'We reply within 24-48 hours',
-        action: 'Send email',
-        color: 'from-green-500 to-emerald-500',
-        bgColor: 'bg-green-50',
-        textColor: 'text-green-600'
-    },
-    {
-        icon: MapPin,
-        title: 'Visit',
-        details: [
-            { label: 'Registered Office', value: charityInfo.address, type: 'address' },
-            { label: 'Bedford Centre', value: '23 High Street, Bedford, MK40 1RN', type: 'address' }
-        ],
-        description: 'Appointments recommended',
-        action: 'Get directions',
-        color: 'from-purple-500 to-pink-500',
-        bgColor: 'bg-purple-50',
-        textColor: 'text-purple-600'
-    }
-]
 
 // Social media links
 const socialLinks = [
@@ -180,15 +118,6 @@ const socialLinks = [
     { name: 'LinkedIn', icon: Linkedin, url: '#', color: 'hover:bg-blue-700', followers: '1.5K' }
 ]
 
-// Inquiry types for dropdown
-const inquiryTypes = [
-    { value: 'general', label: 'General Inquiry' },
-    { value: 'support', label: 'Request Support' },
-    { value: 'donate', label: 'Donation/Partnership' },
-    { value: 'volunteer', label: 'Volunteer Opportunity' },
-    { value: 'prayer', label: 'Prayer Request' },
-    { value: 'other', label: 'Other' }
-]
 
 // FAQ items
 const faqItems = [
@@ -207,34 +136,6 @@ const faqItems = [
     {
         question: 'Do you provide support outside the UK?',
         answer: 'Yes, we operate in both the UK and Kenya. For international inquiries, please specify your location and needs in your message.'
-    }
-]
-
-// Team contacts
-const teamContacts = [
-    {
-        name: 'Rev. Duke Randolph',
-        role: 'Founder & Senior Pastor',
-        email: 'duke@empowermentmissions.org.uk',
-        phone: '07727208820',
-        department: 'Spiritual Leadership',
-        image: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80'
-    },
-    {
-        name: 'Sarah Johnson',
-        role: 'Programs Director',
-        email: 'sarah@empowermentmissions.org.uk',
-        phone: '07727208822',
-        department: 'Educational Programs',
-        image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80'
-    },
-    {
-        name: 'Michael Ochieng',
-        role: 'Kenya Coordinator',
-        email: 'michael@empowermentmissions.org.uk',
-        phone: '+254 700 000000',
-        department: 'Africa Operations',
-        image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80'
     }
 ]
 
