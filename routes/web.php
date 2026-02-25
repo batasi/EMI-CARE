@@ -20,4 +20,7 @@ Route::get('/about', function () {
 Route::get('/impact', function () {
     return Inertia::render('impact/index');
 });
+Route::get('/contact', function () {
+    return Inertia::render('contact/index');
+});
 require __DIR__.'/settings.php';

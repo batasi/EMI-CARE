@@ -108,6 +108,10 @@ const mainNavItems: NavItemWithExact[] = [
         // ]
     },
     {
+        title: 'Contact Us',
+        href: '/contact',
+    },
+    {
         title: 'Get Involved',
         href: '/involve',
         children: [
