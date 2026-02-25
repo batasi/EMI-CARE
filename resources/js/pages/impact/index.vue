@@ -244,178 +244,178 @@ const handleMouseLeave = () => {
 
     <FrontAppLayout :breadcrumbs="breadcrumbs" :is-live="isLive">
         <!-- Hero Section with S.E.E. Model - Enhanced like Home Page -->
-<section class="relative overflow-hidden bg-gradient-to-br from-primary/5 via-white to-blue-50/30">
-    <!-- Background Pattern -->
-    <div class="absolute inset-0 bg-grid-black/[0.02] bg-[size:20px_20px]" />
+        <section class="relative overflow-hidden bg-gradient-to-br from-primary/5 via-white to-blue-50/30">
+            <!-- Background Pattern -->
+            <div class="absolute inset-0 bg-grid-black/[0.02] bg-[size:20px_20px]" />
 
-    <!-- Decorative elements -->
-    <div class="absolute top-0 right-0 w-72 h-72 bg-primary/10 rounded-full -translate-y-36 translate-x-36 animate-float-slow"></div>
-    <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full translate-y-48 -translate-x-48 animate-float-slower"></div>
-    <div class="absolute top-1/3 left-1/4 w-64 h-64 bg-green-500/5 rounded-full blur-3xl animate-pulse-soft"></div>
+            <!-- Decorative elements -->
+            <div class="absolute top-0 right-0 w-72 h-72 bg-primary/10 rounded-full -translate-y-36 translate-x-36 animate-float-slow"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-500/10 rounded-full translate-y-48 -translate-x-48 animate-float-slower"></div>
+            <div class="absolute top-1/3 left-1/4 w-64 h-64 bg-green-500/5 rounded-full blur-3xl animate-pulse-soft"></div>
 
-    <!-- Additional floating shapes -->
-    <div class="absolute top-40 left-10 w-32 h-32 bg-amber-500/5 rounded-full blur-2xl"></div>
-    <div class="absolute bottom-40 right-10 w-40 h-40 bg-purple-500/5 rounded-full blur-2xl"></div>
+            <!-- Additional floating shapes -->
+            <div class="absolute top-40 left-10 w-32 h-32 bg-amber-500/5 rounded-full blur-2xl"></div>
+            <div class="absolute bottom-40 right-10 w-40 h-40 bg-purple-500/5 rounded-full blur-2xl"></div>
 
-    <div class="container relative mx-auto px-4 py-16 lg:py-20">
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
-            <!-- Left Content -->
-            <div class="space-y-6">
-                <!-- Pill badge -->
-                <div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full text-primary text-sm font-medium shadow-lg border border-primary/10">
-                    <Sparkles class="h-4 w-4" />
-                    <span>What We Offer</span>
-                </div>
+            <div class="container relative mx-auto px-4 py-16 lg:py-20">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <!-- Left Content -->
+                    <div class="space-y-6">
+                        <!-- Pill badge -->
+                        <div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full text-primary text-sm font-medium shadow-lg border border-primary/10">
+                            <Sparkles class="h-4 w-4" />
+                            <span>What We Offer</span>
+                        </div>
 
-                <h1 class="text-4xl lg:text-5xl xl:text-5xl font-bold tracking-tight leading-tight">
-                    Transforming Lives Through
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600 block mt-2">
-                        S.E.E. Empowerment
-                    </span>
-                </h1>
+                        <h1 class="text-4xl lg:text-5xl xl:text-5xl font-bold tracking-tight leading-tight">
+                            Transforming Lives Through
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600 block mt-2">
+                                S.E.E. Empowerment
+                            </span>
+                        </h1>
 
-                <p class="text-xl text-muted-foreground leading-relaxed">
-                    Holistic support across
-                    <span class="font-semibold text-gray-900">Socio-spiritual, Economic, and Educational</span>
-                    dimensions for lasting community transformation.
-                </p>
+                        <p class="text-xl text-muted-foreground leading-relaxed">
+                            Holistic support across
+                            <span class="font-semibold text-gray-900">Socio-spiritual, Economic, and Educational</span>
+                            dimensions for lasting community transformation.
+                        </p>
 
-                <div class="flex flex-wrap gap-4">
-                    <Button as-child size="lg" class="bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all">
-                        <Link href="#services" class="flex items-center gap-2">
-                            Explore Our Services
-                            <ArrowRight class="h-5 w-5" />
-                        </Link>
-                    </Button>
+                        <div class="flex flex-wrap gap-4">
+                            <Button as-child size="lg" class="bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl transition-all">
+                                <Link href="#services" class="flex items-center gap-2">
+                                    Explore Our Services
+                                    <ArrowRight class="h-5 w-5" />
+                                </Link>
+                            </Button>
 
-                    <Button as-child size="lg" variant="outline" class="bg-white/80 backdrop-blur-sm border-primary/20 hover:bg-primary/5">
-                        <Link href="/contact" class="flex items-center gap-2">
-                            <Phone class="h-5 w-5" />
-                            Get In Touch
-                        </Link>
-                    </Button>
-                </div>
+                            <Button as-child size="lg" variant="outline" class="bg-white/80 backdrop-blur-sm border-primary/20 hover:bg-primary/5">
+                                <Link href="/contact" class="flex items-center gap-2">
+                                    <Phone class="h-5 w-5" />
+                                    Get In Touch
+                                </Link>
+                            </Button>
+                        </div>
 
-                <!-- Quick Stats - Services Focused -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-gray-200">
-                    <div class="text-center">
-                        <div class="text-2xl font-bold text-primary">4</div>
-                        <div class="text-sm text-muted-foreground">Core Pillars</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-2xl font-bold text-primary">8+</div>
-                        <div class="text-sm text-muted-foreground">Programs</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-2xl font-bold text-primary">100%</div>
-                        <div class="text-sm text-muted-foreground">Funds to Mission</div>
-                    </div>
-                    <div class="text-center">
-                        <div class="text-2xl font-bold text-primary">UK & Kenya</div>
-                        <div class="text-sm text-muted-foreground">Service Areas</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Right Content - Image Carousel (adapted for services) -->
-            <div class="relative" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
-                <div class="relative rounded-2xl overflow-hidden shadow-2xl">
-                    <!-- Carousel Container -->
-                    <div class="relative h-[500px] overflow-hidden">
-                        <!-- Carousel Images -->
-                        <div class="relative h-full">
-                            <!-- Image 1 - Educational -->
-                            <div class="absolute inset-0 transition-opacity duration-700 ease-in-out" :class="{ 'opacity-100': activeImage === 0, 'opacity-0': activeImage !== 0 }">
-                                <img
-                                    src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-                                    alt="Educational empowerment programs"
-                                    class="w-full h-full object-cover"
-                                />
-                                <div class="absolute inset-0 bg-gradient-to-t from-blue-600/40 via-blue-600/20 to-transparent"></div>
-                                <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                                    <h3 class="text-xl font-bold mb-2">Educational Empowerment</h3>
-                                    <p class="text-sm opacity-90">School fee support and learning resources</p>
-                                </div>
+                        <!-- Quick Stats - Services Focused -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4 border-t border-gray-200">
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-primary">4</div>
+                                <div class="text-sm text-muted-foreground">Core Pillars</div>
                             </div>
-
-                            <!-- Image 2 - Health -->
-                            <div class="absolute inset-0 transition-opacity duration-700 ease-in-out" :class="{ 'opacity-100': activeImage === 1, 'opacity-0': activeImage !== 1 }">
-                                <img
-                                    src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-                                    alt="Health and social care services"
-                                    class="w-full h-full object-cover"
-                                />
-                                <div class="absolute inset-0 bg-gradient-to-t from-green-600/40 via-green-600/20 to-transparent"></div>
-                                <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                                    <h3 class="text-xl font-bold mb-2">Health & Social Care</h3>
-                                    <p class="text-sm opacity-90">Medical consultation and wellness programs</p>
-                                </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-primary">8+</div>
+                                <div class="text-sm text-muted-foreground">Programs</div>
                             </div>
-
-                            <!-- Image 3 - Spiritual -->
-                            <div class="absolute inset-0 transition-opacity duration-700 ease-in-out" :class="{ 'opacity-100': activeImage === 2, 'opacity-0': activeImage !== 2 }">
-                                <img
-                                    src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-                                    alt="Spiritual guidance and community building"
-                                    class="w-full h-full object-cover"
-                                />
-                                <div class="absolute inset-0 bg-gradient-to-t from-purple-600/40 via-purple-600/20 to-transparent"></div>
-                                <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                                    <h3 class="text-xl font-bold mb-2">Spiritual & Community</h3>
-                                    <p class="text-sm opacity-90">Faith-based programs and community support</p>
-                                </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-primary">100%</div>
+                                <div class="text-sm text-muted-foreground">Funds to Mission</div>
                             </div>
+                            <div class="text-center">
+                                <div class="text-2xl font-bold text-primary">UK & Kenya</div>
+                                <div class="text-sm text-muted-foreground">Service Areas</div>
+                            </div>
+                        </div>
+                    </div>
 
-                            <!-- Image 4 - Economic -->
-                            <div class="absolute inset-0 transition-opacity duration-700 ease-in-out" :class="{ 'opacity-100': activeImage === 3, 'opacity-0': activeImage !== 3 }">
-                                <img
-                                    src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
-                                    alt="Economic empowerment programs"
-                                    class="w-full h-full object-cover"
-                                />
-                                <div class="absolute inset-0 bg-gradient-to-t from-amber-600/40 via-amber-600/20 to-transparent"></div>
-                                <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
-                                    <h3 class="text-xl font-bold mb-2">Economic Empowerment</h3>
-                                    <p class="text-sm opacity-90">Skills training and livelihood support</p>
+                    <!-- Right Content - Image Carousel (adapted for services) -->
+                    <div class="relative" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                            <!-- Carousel Container -->
+                            <div class="relative h-[500px] overflow-hidden">
+                                <!-- Carousel Images -->
+                                <div class="relative h-full">
+                                    <!-- Image 1 - Educational -->
+                                    <div class="absolute inset-0 transition-opacity duration-700 ease-in-out" :class="{ 'opacity-100': activeImage === 0, 'opacity-0': activeImage !== 0 }">
+                                        <img
+                                            src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                                            alt="Educational empowerment programs"
+                                            class="w-full h-full object-cover"
+                                        />
+                                        <div class="absolute inset-0 bg-gradient-to-t from-blue-600/40 via-blue-600/20 to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                                            <h3 class="text-xl font-bold mb-2">Educational Empowerment</h3>
+                                            <p class="text-sm opacity-90">School fee support and learning resources</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Image 2 - Health -->
+                                    <div class="absolute inset-0 transition-opacity duration-700 ease-in-out" :class="{ 'opacity-100': activeImage === 1, 'opacity-0': activeImage !== 1 }">
+                                        <img
+                                            src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                                            alt="Health and social care services"
+                                            class="w-full h-full object-cover"
+                                        />
+                                        <div class="absolute inset-0 bg-gradient-to-t from-green-600/40 via-green-600/20 to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                                            <h3 class="text-xl font-bold mb-2">Health & Social Care</h3>
+                                            <p class="text-sm opacity-90">Medical consultation and wellness programs</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Image 3 - Spiritual -->
+                                    <div class="absolute inset-0 transition-opacity duration-700 ease-in-out" :class="{ 'opacity-100': activeImage === 2, 'opacity-0': activeImage !== 2 }">
+                                        <img
+                                            src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                                            alt="Spiritual guidance and community building"
+                                            class="w-full h-full object-cover"
+                                        />
+                                        <div class="absolute inset-0 bg-gradient-to-t from-purple-600/40 via-purple-600/20 to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                                            <h3 class="text-xl font-bold mb-2">Spiritual & Community</h3>
+                                            <p class="text-sm opacity-90">Faith-based programs and community support</p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Image 4 - Economic -->
+                                    <div class="absolute inset-0 transition-opacity duration-700 ease-in-out" :class="{ 'opacity-100': activeImage === 3, 'opacity-0': activeImage !== 3 }">
+                                        <img
+                                            src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
+                                            alt="Economic empowerment programs"
+                                            class="w-full h-full object-cover"
+                                        />
+                                        <div class="absolute inset-0 bg-gradient-to-t from-amber-600/40 via-amber-600/20 to-transparent"></div>
+                                        <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+                                            <h3 class="text-xl font-bold mb-2">Economic Empowerment</h3>
+                                            <p class="text-sm opacity-90">Skills training and livelihood support</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Navigation Buttons -->
+                                <button
+                                    @click="prevImage"
+                                    class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-2 rounded-full transition-all duration-300"
+                                >
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                </button>
+                                <button
+                                    @click="nextImage"
+                                    class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-2 rounded-full transition-all duration-300"
+                                >
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </button>
+
+                                <!-- Indicators -->
+                                <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+                                    <button
+                                        v-for="index in 4"
+                                        :key="index"
+                                        @click="activeImage = index - 1"
+                                        class="w-3 h-3 rounded-full transition-all duration-300"
+                                        :class="activeImage === index - 1 ? 'bg-white w-8' : 'bg-white/50 hover:bg-white/70'"
+                                        :aria-label="`Go to slide ${index}`"
+                                    ></button>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Navigation Buttons -->
-                        <button
-                            @click="prevImage"
-                            class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-2 rounded-full transition-all duration-300"
-                        >
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                            </svg>
-                        </button>
-                        <button
-                            @click="nextImage"
-                            class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white p-2 rounded-full transition-all duration-300"
-                        >
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </button>
-
-                        <!-- Indicators -->
-                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
-                            <button
-                                v-for="index in 4"
-                                :key="index"
-                                @click="activeImage = index - 1"
-                                class="w-3 h-3 rounded-full transition-all duration-300"
-                                :class="activeImage === index - 1 ? 'bg-white w-8' : 'bg-white/50 hover:bg-white/70'"
-                                :aria-label="`Go to slide ${index}`"
-                            ></button>
-                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
 
         <!-- How to Access Services -->
         <section class="py-20 bg-gradient-to-b from-primary/5 to-white">
