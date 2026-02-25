@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { Head, Link } from '@inertiajs/vue3'
-import { Heart, BookOpen, Globe, Phone, MapPin, Users, Calendar, Clock, Shield, GraduationCap, HandHeart, Building, ArrowRight, ChevronRight } from 'lucide-vue-next'
-import { computed } from 'vue'
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { useForm } from '@inertiajs/vue3'
+import { Heart, BookOpen, Globe, Phone, MapPin, Users, Calendar, Clock, Shield, GraduationCap, HandHeart, Building, ArrowRight, ChevronRight, CheckCircle, Send } from 'lucide-vue-next'
+import { computed, ref, onMounted, onBeforeUnmount } from 'vue'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
@@ -15,6 +15,36 @@ const breadcrumbs: BreadcrumbItem[] = [
         href: '/',
     },
 ];
+
+// Form handling with Inertia - matching contact page structure
+const form = useForm({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    inquiryType: 'general',
+    message: '',
+    newsletter: false,
+    consent: false
+})
+
+// Submit handler
+const submit = () => {
+    form.post('/contact', {
+        preserveScroll: true,
+        onSuccess: () => {
+            form.reset()
+            showSuccessMessage.value = true
+            setTimeout(() => {
+                showSuccessMessage.value = false
+            }, 5000)
+        }
+    })
+}
+
+// Success message visibility
+const showSuccessMessage = ref(false)
+
 // Carousel state
 const activeImage = ref(0)
 const totalImages = 4
@@ -33,7 +63,7 @@ const prevImage = () => {
 const startAutoPlay = () => {
     autoPlayInterval = setInterval(() => {
         nextImage()
-    }, 5000) // Change image every 5 seconds
+    }, 5000)
 }
 
 const stopAutoPlay = () => {
@@ -65,6 +95,7 @@ const handleMouseLeave = () => {
     carouselHover.value = false
     startAutoPlay()
 }
+
 // Charity information based on provided data
 const charityInfo = {
     name: 'Empowerment Missions Int.',
@@ -128,7 +159,7 @@ const mainActivities = [
     }
 ]
 
-// Upcoming events - updated to reflect charity activities
+// Upcoming events
 const upcomingEvents = [
     {
         id: 1,
@@ -187,16 +218,15 @@ const latestUpdates = [
     }
 ]
 
-
-
 // Check if live stream is active
 const isLive = computed(() => {
     const now = new Date()
-    const day = now.getDay() // 0 = Sunday
+    const day = now.getDay()
     const hour = now.getHours()
-    return day === 0 && hour >= 9 && hour <= 12 // Sunday 9am-12pm
+    return day === 0 && hour >= 9 && hour <= 12
 })
 </script>
+
 <style scoped>
 @keyframes float-slow {
     0%, 100% { transform: translateY(0px) translateX(0px); }
@@ -232,10 +262,26 @@ const isLive = computed(() => {
         linear-gradient(to bottom, rgb(0 0 0 / 0.02) 1px, transparent 1px);
 }
 </style>
+
 <template>
     <Head title="Empowerment Missions Int." />
 
     <FrontAppLayout :breadcrumbs="breadcrumbs" :is-live="isLive">
+        <!-- Success Message Banner - Matching contact page exactly -->
+        <transition
+            enter-active-class="transition duration-300 ease-out"
+            enter-from-class="transform -translate-y-full opacity-0"
+            enter-to-class="transform translate-y-0 opacity-100"
+            leave-active-class="transition duration-200 ease-in"
+            leave-from-class="transform translate-y-0 opacity-100"
+            leave-to-class="transform -translate-y-full opacity-0"
+        >
+            <div v-if="showSuccessMessage" class="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 bg-green-50 border border-green-200 rounded-lg shadow-lg px-6 py-4 flex items-center gap-3">
+                <CheckCircle class="h-5 w-5 text-green-600" />
+                <span class="text-green-800 font-medium">Thank you! Your message has been sent successfully. We'll respond within 24-48 hours.</span>
+            </div>
+        </transition>
+
         <!-- Hero Section -->
         <section class="relative overflow-hidden bg-green-100 from-blue-50 via-white to-primary/10">
             <div class="absolute inset-0 bg-grid-black/[0.02] bg-[size:20px_20px]" />
@@ -244,12 +290,10 @@ const isLive = computed(() => {
             <div class="absolute top-0 right-0 w-72 h-72 bg-green-500 rounded-full -translate-y-36 translate-x-36" />
             <div class="absolute bottom-0 left-0 w-96 h-96 bg-green-500 rounded-full translate-y-48 -translate-x-48" />
 
-            <div class="container relative mx-auto px-4 py-16 ">
+            <div class="container relative mx-auto px-4 py-16">
                 <div class="grid lg:grid-cols-2 gap-12 items-center">
                     <!-- Left Content -->
                     <div class="space-y-4">
-
-
                         <h1 class="text-4xl lg:text-5xl xl:text-5xl font-bold tracking-tight leading-tight">
                             Empowering Communities
                             <span class="text-green-700 block">Through Faith & Action</span>
@@ -301,9 +345,7 @@ const isLive = computed(() => {
                     <!-- Right Content - Image Carousel -->
                     <div class="relative" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
                         <div class="relative rounded-2xl overflow-hidden shadow-2xl">
-                            <!-- Carousel Container -->
                             <div class="relative h-[500px] overflow-hidden">
-                                <!-- Carousel Images -->
                                 <div class="relative h-full">
                                     <!-- Image 1 - Community Gathering -->
                                     <div class="absolute inset-0 transition-opacity duration-700 ease-in-out" :class="{ 'opacity-100': activeImage === 0, 'opacity-0': activeImage !== 0 }">
@@ -312,9 +354,7 @@ const isLive = computed(() => {
                                             alt="Community prayer gathering and fellowship"
                                             class="w-full h-full object-cover"
                                         />
-                                        <!-- Image Overlay -->
                                         <div class="absolute inset-0 bg-gradient-to-t from-primary/40 via-primary/20 to-transparent"></div>
-                                        <!-- Caption -->
                                         <div class="absolute bottom-0 left-0 right-0 p-6 text-white">
                                             <h3 class="text-xl font-bold mb-2">Community Fellowship</h3>
                                             <p class="text-sm opacity-90">Bringing people together through faith and support</p>
@@ -393,8 +433,6 @@ const isLive = computed(() => {
                                         :aria-label="`Go to slide ${index}`"
                                     ></button>
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
@@ -415,7 +453,6 @@ const isLive = computed(() => {
                     </div>
 
                     <div class="space-y-6">
-
                         <h2 class="text-3xl lg:text-4xl font-bold tracking-tight">
                             Making a Difference Across Communities
                         </h2>
@@ -459,38 +496,22 @@ const isLive = computed(() => {
 
         <!-- S.E.E. Model Section -->
         <section class="relative bg-green-100 overflow-hidden">
-            <!-- Main background with gradient and pattern -->
-
-            <!-- Abstract pattern overlay -->
             <div class="absolute inset-0 opacity-30">
                 <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, rgb(0 0 0 / 0.05) 1px, transparent 0); background-size: 40px 40px;"></div>
             </div>
 
-            <!-- Layered geometric shapes -->
             <div class="absolute inset-0 overflow-hidden">
-                <!-- Large floating shapes -->
                 <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary/5 rounded-full blur-3xl"></div>
                 <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
-
-                <!-- Diagonal lines pattern -->
                 <div class="absolute inset-0 opacity-[0.02]" style="background-image: repeating-linear-gradient(45deg, #000 0px, #000 2px, transparent 2px, transparent 20px);"></div>
-
-                <!-- Floating orbs with different colors -->
                 <div class="absolute top-20 left-10 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl animate-float-slow"></div>
                 <div class="absolute bottom-20 right-10 w-80 h-80 bg-emerald-500/5 rounded-full blur-3xl animate-float-slower"></div>
                 <div class="absolute top-1/2 left-1/3 w-96 h-96 bg-rose-500/5 rounded-full blur-3xl animate-pulse-soft"></div>
-
-                <!-- Scattered dots -->
-                <div class="absolute top-1/4 right-1/4 w-2 h-2 bg-primary/20 rounded-full"></div>
-                <div class="absolute bottom-1/3 left-1/4 w-3 h-3 bg-blue-400/20 rounded-full"></div>
-                <div class="absolute top-2/3 right-1/3 w-1.5 h-1.5 bg-green-400/20 rounded-full"></div>
             </div>
 
-            <!-- Subtle grid overlay -->
             <div class="absolute inset-0 bg-grid-black/[0.02] bg-[size:30px_30px]" />
 
             <div class="container relative mx-auto">
-                <!-- Section Header (same as before) -->
                 <div class="text-center max-w-3xl mx-auto mb-2">
                     <div class="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full text-primary text-sm font-medium mb-6 border border-primary/20 shadow-sm">
                         <Shield class="h-4 w-4" />
@@ -507,14 +528,12 @@ const isLive = computed(() => {
                     </p>
                 </div>
 
-                <!-- Interactive Pillars Display (same as before) -->
                 <div class="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
                     <div
                         v-for="(pillar, index) in seeModel"
                         :key="pillar.title"
                         class="group relative"
                     >
-                        <!-- Connection Lines (only visible on desktop) -->
                         <div
                             v-if="index < seeModel.length - 1"
                             class="hidden lg:block absolute top-1/3 -right-8 w-16 h-[2px] bg-gradient-to-r from-primary/20 to-primary/40 z-10"
@@ -522,9 +541,7 @@ const isLive = computed(() => {
                             <div class="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-primary/40 rounded-full"></div>
                         </div>
 
-                        <!-- Main Card with glass effect -->
                         <div class="relative bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-white/50 overflow-hidden h-full">
-                            <!-- Card background gradient on hover -->
                             <div
                                 class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700"
                                 :class="[
@@ -534,9 +551,7 @@ const isLive = computed(() => {
                                 ]"
                             ></div>
 
-                            <!-- Content (same as before) -->
                             <div class="relative">
-                                <!-- Icon with animated ring -->
                                 <div class="relative inline-block mb-6">
                                     <div
                                         class="absolute inset-0 rounded-2xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-500"
@@ -558,7 +573,6 @@ const isLive = computed(() => {
                                     {{ pillar.description }}
                                 </p>
 
-                                <!-- Impact Metrics -->
                                 <div class="space-y-4">
                                     <div class="flex items-center gap-3 text-sm">
                                         <div class="w-2 h-2 rounded-full" :class="pillar.color.replace('text', 'bg')"></div>
@@ -574,7 +588,6 @@ const isLive = computed(() => {
                                     </div>
                                 </div>
 
-                                <!-- Decorative element -->
                                 <div class="absolute bottom-0 right-0 opacity-5 group-hover:opacity-10 transition-opacity">
                                     <component :is="pillar.icon" class="h-24 w-24" :class="pillar.color" />
                                 </div>
@@ -583,21 +596,13 @@ const isLive = computed(() => {
                     </div>
                 </div>
 
-                <!-- Bottom Quote with enhanced styling -->
                 <div class="text-center mt-16 max-w-2xl mx-auto relative">
-                    <!-- Decorative quote marks -->
                     <div class="absolute -top-6 left-0 text-6xl text-primary/10 font-serif">"</div>
                     <div class="absolute -bottom-6 right-0 text-6xl text-primary/10 font-serif">"</div>
-
                     <p class="text-lg text-muted-foreground italic relative z-10 px-8">
                         "Together, these three pillars create a foundation for sustainable community development
                         and lasting positive change."
                     </p>
-
-                    <!-- Quick stats with better styling -->
-                    <div class="flex justify-center gap-8 mt-10 pt-6 border-t border-primary/10">
-
-                    </div>
                 </div>
             </div>
         </section>
@@ -714,11 +719,11 @@ const isLive = computed(() => {
             </div>
         </section>
 
-        <!-- Contact & Get Involved -->
+        <!-- Contact & Get Involved - Updated with full form matching contact page -->
         <section class="py-16 lg:py-20 bg-gradient-to-r from-blue-50 via-white to-primary/10">
             <div class="container mx-auto px-4">
                 <div class="grid lg:grid-cols-2 gap-8">
-                    <!-- Left side remains the same -->
+                    <!-- Left side - Contact Info -->
                     <div class="space-y-6">
                         <div class="inline-flex items-center rounded-full bg-primary/10 px-4 py-2 text-sm font-medium text-primary">
                             <MapPin class="mr-2 h-4 w-4" />
@@ -750,7 +755,7 @@ const isLive = computed(() => {
                             <div class="flex items-center gap-3">
                                 <Globe class="h-5 w-5 text-primary flex-shrink-0" />
                                 <div>
-                                    <p class="font-medium">Email </p>
+                                    <p class="font-medium">Email</p>
                                     <p class="text-sm text-muted-foreground">{{ charityInfo.email }}</p>
                                 </div>
                             </div>
@@ -772,84 +777,136 @@ const isLive = computed(() => {
                         </div>
                     </div>
 
-                    <!-- Right side - Contact Form -->
+                    <!-- Right side - Contact Form (Matching contact page exactly) -->
                     <div class="bg-white rounded-2xl shadow-lg p-8 border border-primary/10">
                         <h3 class="text-2xl font-bold mb-6">Send Us a Message</h3>
 
-                        <form class="space-y-6" action="/api/contact" method="POST">
+                        <form @submit.prevent="submit" class="space-y-6">
+                            <!-- Error Summary -->
+                            <div v-if="Object.keys(form.errors).length > 0" class="bg-red-50 border border-red-200 rounded-lg p-4">
+                                <p class="text-sm text-red-600 font-medium mb-2">Please fix the following errors:</p>
+                                <ul class="list-disc list-inside text-sm text-red-600">
+                                    <li v-for="(error, field) in form.errors" :key="field">{{ error }}</li>
+                                </ul>
+                            </div>
+
+                            <!-- Name Fields -->
                             <div class="grid md:grid-cols-2 gap-6">
                                 <div class="space-y-2">
-                                    <label for="firstName" class="text-sm font-medium">First Name *</label>
+                                    <label for="home-firstName" class="text-sm font-medium">First Name <span class="text-red-500">*</span></label>
                                     <input
+                                        id="home-firstName"
+                                        v-model="form.firstName"
                                         type="text"
-                                        id="firstName"
-                                        name="firstName"
                                         required
                                         class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition"
+                                        :class="{ 'border-red-500': form.errors.firstName }"
                                         placeholder="John"
-                                    >
+                                    />
+                                    <p v-if="form.errors.firstName" class="text-sm text-red-600">{{ form.errors.firstName }}</p>
                                 </div>
+
                                 <div class="space-y-2">
-                                    <label for="lastName" class="text-sm font-medium">Last Name *</label>
+                                    <label for="home-lastName" class="text-sm font-medium">Last Name <span class="text-red-500">*</span></label>
                                     <input
+                                        id="home-lastName"
+                                        v-model="form.lastName"
                                         type="text"
-                                        id="lastName"
-                                        name="lastName"
                                         required
                                         class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition"
+                                        :class="{ 'border-red-500': form.errors.lastName }"
                                         placeholder="Doe"
-                                    >
+                                    />
+                                    <p v-if="form.errors.lastName" class="text-sm text-red-600">{{ form.errors.lastName }}</p>
                                 </div>
                             </div>
 
-                            <div class="space-y-2">
-                                <label for="email" class="text-sm font-medium">Email Address *</label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    name="email"
-                                    required
-                                    class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition"
-                                    placeholder="john@example.com"
-                                >
+                            <!-- Contact Fields -->
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div class="space-y-2">
+                                    <label for="home-email" class="text-sm font-medium">Email Address <span class="text-red-500">*</span></label>
+                                    <input
+                                        id="home-email"
+                                        v-model="form.email"
+                                        type="email"
+                                        required
+                                        class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition"
+                                        :class="{ 'border-red-500': form.errors.email }"
+                                        placeholder="john@example.com"
+                                    />
+                                    <p v-if="form.errors.email" class="text-sm text-red-600">{{ form.errors.email }}</p>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <label for="home-phone" class="text-sm font-medium">Phone Number</label>
+                                    <input
+                                        id="home-phone"
+                                        v-model="form.phone"
+                                        type="tel"
+                                        class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition"
+                                        placeholder="07727 208820"
+                                    />
+                                </div>
                             </div>
 
-
-
+                            <!-- Message -->
                             <div class="space-y-2">
-                                <label for="message" class="text-sm font-medium">Message *</label>
+                                <label for="home-message" class="text-sm font-medium">Message <span class="text-red-500">*</span></label>
                                 <textarea
-                                    id="message"
-                                    name="message"
+                                    id="home-message"
+                                    v-model="form.message"
                                     required
-                                    rows="3"
+                                    rows="5"
                                     class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition resize-none"
-                                    placeholder="Tell us how we can help you..."
+                                    :class="{ 'border-red-500': form.errors.message }"
+                                    placeholder="Please tell us how we can help you..."
                                 ></textarea>
+                                <p v-if="form.errors.message" class="text-sm text-red-600">{{ form.errors.message }}</p>
                             </div>
 
+                            <!-- Preferences - Matching contact page exactly -->
                             <div class="space-y-4">
                                 <div class="flex items-start gap-3">
                                     <input
+                                        id="home-newsletter"
+                                        v-model="form.newsletter"
                                         type="checkbox"
-                                        id="newsletter"
-                                        name="newsletter"
                                         class="mt-1 h-4 w-4 text-primary rounded focus:ring-primary/20"
-                                    >
-                                    <label for="newsletter" class="text-sm text-muted-foreground">
-                                        I'd like to receive updates about charity news and upcoming events
+                                    />
+                                    <label for="home-newsletter" class="text-sm text-muted-foreground">
+                                        I'd like to receive updates about charity news, events, and opportunities to get involved.
                                     </label>
                                 </div>
 
-                                <p class="text-xs text-muted-foreground">
-                                    By submitting this form, you agree to our privacy policy and consent to
-                                    being contacted regarding your inquiry.
-                                </p>
+                                <div class="flex items-start gap-3">
+                                    <input
+                                        id="home-consent"
+                                        v-model="form.consent"
+                                        type="checkbox"
+                                        required
+                                        class="mt-1 h-4 w-4 text-primary rounded focus:ring-primary/20"
+                                    />
+                                    <label for="home-consent" class="text-sm text-muted-foreground">
+                                        <span class="text-red-500">*</span> I consent to Empowerment Missions Int. processing my personal data to respond to my inquiry. View our <Link href="/privacy" class="text-primary hover:underline">Privacy Policy</Link>.
+                                    </label>
+                                </div>
                             </div>
 
-                            <Button type="submit" class="w-full bg-primary hover:bg-primary/90 py-3 text-base">
-                                Send Message
+                            <!-- Submit Button -->
+                            <Button
+                                type="submit"
+                                :disabled="form.processing || !form.consent"
+                                class="w-full bg-primary hover:bg-primary/90 py-3 text-base disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                <Send class="h-5 w-5 mr-2" />
+                                {{ form.processing ? 'Sending...' : 'Send Message' }}
                             </Button>
+
+                            <!-- Response time note -->
+                            <p class="text-xs text-center text-muted-foreground">
+                                By submitting this form, you agree to our privacy policy and terms of use.
+                                We typically respond within 24-48 hours.
+                            </p>
                         </form>
                     </div>
                 </div>
@@ -857,4 +914,3 @@ const isLive = computed(() => {
         </section>
     </FrontAppLayout>
 </template>
-
