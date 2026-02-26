@@ -1,25 +1,17 @@
 <script setup lang="ts">
 import { Head, Link, router, useForm } from '@inertiajs/vue3'
-import { ref, computed } from 'vue'
+import { format } from 'date-fns'
 import {
-    Mail, Phone, MapPin, Calendar, Clock, Globe,
-    ArrowLeft, CheckCircle, XCircle, AlertCircle,
+    Mail, Calendar,
+    CheckCircle,
     Send, Eye, Archive, Edit, Save, Trash2,
     User, Sparkles, MessageSquare, Shield,
     Copy, Check, ChevronLeft, MoreHorizontal
 } from 'lucide-vue-next'
-import { Button } from '@/components/ui/button'
+import { ref } from 'vue'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Separator } from '@/components/ui/separator'
-import { Textarea } from '@/components/ui/textarea'
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from '@/components/ui/select'
 import {
     Dialog,
     DialogContent,
@@ -36,9 +28,17 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from '@/components/ui/select'
+import { Separator } from '@/components/ui/separator'
 import AppLayout from '@/layouts/AppLayout.vue'
 import { type BreadcrumbItem } from '@/types'
-import { format } from 'date-fns'
+import { Textarea } from '@/components/ui/textarea'
 
 interface ContactSubmission {
     id: number

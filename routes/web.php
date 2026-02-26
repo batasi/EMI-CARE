@@ -24,6 +24,12 @@ Route::get('/impact', function () {
 Route::get('/donations', function () {
     return Inertia::render('donations/index');
 });
+Route::get('/volunteer', function () {
+    return Inertia::render('volunteer/index');
+});
+Route::get('/partnerships', function () {
+    return Inertia::render('partnerships/index');
+});
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 
