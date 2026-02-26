@@ -21,6 +21,9 @@ Route::get('/about', function () {
 Route::get('/impact', function () {
     return Inertia::render('impact/index');
 });
+Route::get('/donations', function () {
+    return Inertia::render('donations/index');
+});
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 

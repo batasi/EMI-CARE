@@ -115,10 +115,8 @@ const mainNavItems: NavItemWithExact[] = [
         title: 'Get Involved',
         href: '/involve',
         children: [
-            { title: 'Make a Donation', href: '/donate' },
+            { title: 'Make a Donation', href: '/donations' },
             { title: 'Volunteer', href: '/volunteer' },
-            { title: 'Request Support', href: '/support' },
-            { title: 'Prayer Requests', href: '/prayer-request' },
             { title: 'Partnerships', href: '/partnerships' }
         ]
     },
@@ -280,7 +278,7 @@ const user = computed(() => page.props.auth?.user)
                                 <!-- Donate Button Mobile -->
                                 <SheetClose as-child>
                                     <Button as-child class="w-full mb-4 bg-primary hover:bg-primary/90 text-primary-foreground">
-                                        <Link :href="'/donate'" class="flex items-center justify-center gap-2">
+                                        <Link :href="'/donations'" class="flex items-center justify-center gap-2">
                                             <Heart class="h-4 w-4" />
                                             Donate Now
                                         </Link>
@@ -440,7 +438,7 @@ const user = computed(() => page.props.auth?.user)
                     size="sm"
                     class="hidden lg:flex gap-1.5 bg-primary hover:bg-primary/90 h-10 text-primary-foreground btn-glow"
                 >
-                    <Link href="/donate" class="flex items-center">
+                    <Link href="/donations" class="flex items-center">
                         <Heart class="h-4 w-4" />
                         Donate Now
                     </Link>
