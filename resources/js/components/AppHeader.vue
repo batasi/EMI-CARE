@@ -113,7 +113,7 @@ const mainNavItems: NavItemWithExact[] = [
     },
     {
         title: 'Get Involved',
-        href: '/involve',
+        href: '#',
         children: [
             { title: 'Make a Donation', href: '/donations' },
             { title: 'Volunteer', href: '/volunteer' },
@@ -122,12 +122,12 @@ const mainNavItems: NavItemWithExact[] = [
     },
     {
         title: 'Events',
-        href: '/events',
+        href: '#',
         children: [
-            { title: 'Upcoming Events', href: '/events/upcoming' },
-            { title: 'Community Gatherings', href: '/events/community' },
-            { title: 'Workshops', href: '/events/workshops' },
-            { title: 'Event Calendar', href: '/calendar' }
+            { title: 'Upcoming Events', href: '#' },
+            { title: 'Community Gatherings', href: '#' },
+            { title: 'Workshops', href: '#' },
+            { title: 'Event Calendar', href: '#' }
         ]
     }
 ]
