@@ -29,8 +29,6 @@ import {
     DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Input } from '@/components/ui/input'
-import AppLayout from '@/layouts/AppLayout.vue'
-import { type BreadcrumbItem } from '@/types'
 import {
     Pagination,
     PaginationNext,
@@ -51,6 +49,8 @@ import {
     TableHeader,
     TableRow,
 } from '@/components/ui/table'
+import AppLayout from '@/layouts/AppLayout.vue'
+import { type BreadcrumbItem } from '@/types'
 
 interface ContactSubmission {
     id: number
