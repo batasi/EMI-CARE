@@ -28,7 +28,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 // YouTube API configuration
 const YOUTUBE_API_KEY = 'AIzaSyC2DO4xkI5XO7LKWWxDqXneCJ7MvP8L8HA'
-const CHANNEL_ID = 'UCqYw-CTd1dU2yGI71sEyqNw' // ← REPLACE WITH YOUR ACTUAL CHANNEL ID
+const CHANNEL_ID = 'UC2GiTzYiq67dIioduTtO8QA' // ← REPLACE WITH YOUR ACTUAL CHANNEL ID
 
 // Loading states
 const isLoading = ref(true)
@@ -39,7 +39,7 @@ const error = ref<string | null>(null)
 const youtubeChannel = ref({
     name: 'Empowerment Missions Int.',
     handle: '@EmpowermentMissions',
-    url: 'https://www.youtube.com/@gmanews',
+    url: 'https://www.youtube.com/@EmpowermentMissions',
     channelId: CHANNEL_ID,
     subscriberCount: '0',
     videoCount: '0',
@@ -605,69 +605,6 @@ onMounted(() => {
                 </div>
             </Teleport>
 
-            <!-- Hero Section -->
-            <section class="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-primary">
-                <!-- Background Pattern -->
-                <div class="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px]" />
-
-                <!-- Decorative Elements -->
-                <div class="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -translate-y-48 translate-x-48 blur-3xl"></div>
-                <div class="absolute bottom-0 left-0 w-96 h-96 bg-black/10 rounded-full translate-y-48 -translate-x-48 blur-3xl"></div>
-
-                <div class="container relative mx-auto px-4 py-16 lg:py-20">
-                    <div class="max-w-4xl mx-auto text-center text-white">
-
-                        <!-- Channel Info -->
-                        <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight mb-4">
-                            {{ youtubeChannel.name }}
-                        </h1>
-
-                        <p class="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                            {{ youtubeChannel.description }}
-                        </p>
-
-                        <!-- Channel Stats -->
-                        <div class="flex flex-wrap justify-center gap-8 mb-8">
-                            <div class="text-center">
-                                <div class="text-2xl font-bold">{{ youtubeChannel.subscriberCount }}</div>
-                                <div class="text-sm text-white/80">Subscribers</div>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-2xl font-bold">{{ youtubeChannel.videoCount }}</div>
-                                <div class="text-sm text-white/80">Videos</div>
-                            </div>
-                            <div class="text-center">
-                                <div class="text-2xl font-bold">{{ youtubeChannel.viewCount }}</div>
-                                <div class="text-sm text-white/80">Views</div>
-                            </div>
-                        </div>
-
-                        <!-- Action Buttons -->
-                        <div class="flex flex-wrap justify-center gap-4">
-                            <Button
-                                size="lg"
-                                class="bg-white text-red-600 hover:bg-white/90 hover:text-red-700"
-                                @click="handleSubscribe"
-                            >
-                                <Youtube class="h-5 w-5 mr-2" />
-                                Subscribe to Channel
-                            </Button>
-
-                            <Button
-                                v-if="isLive"
-                                size="lg"
-                                variant="outline"
-                                class="border-white text-white hover:bg-white/20"
-                                @click="watchLive"
-                            >
-                                <Radio class="h-5 w-5 mr-2 animate-pulse" />
-                                Watch Live Now
-                            </Button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
             <!-- Live Stream Section (if live) -->
             <section v-if="isLive" class="py-8 bg-gradient-to-r from-red-500 to-red-600">
                 <div class="container mx-auto px-4">
@@ -696,6 +633,114 @@ onMounted(() => {
                             <Play class="h-5 w-5 mr-2 fill-current" />
                             Join Live Stream
                         </Button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Hero Section -->
+            <section class="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-primary">
+                <!-- Background Pattern -->
+                <div class="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px]" />
+
+                <!-- Decorative Elements -->
+                <div class="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -translate-y-48 translate-x-48 blur-3xl"></div>
+                <div class="absolute bottom-0 left-0 w-96 h-96 bg-black/10 rounded-full translate-y-48 -translate-x-48 blur-3xl"></div>
+
+                <div class="container relative mx-auto px-4 py-16 lg:py-20">
+                    <div class="grid lg:grid-cols-2 gap-12 items-center">
+                        <!-- Left Content - Text and Stats -->
+                        <div class="text-center lg:text-left text-white">
+                            <!-- Channel Info -->
+                            <h1 class="text-4xl lg:text-5xl xl:text-5xl font-bold tracking-tight mb-4">
+                                {{ youtubeChannel.name }}
+                            </h1>
+
+                            <p class="text-xl text-white/90 mb-8 max-w-xl mx-auto lg:mx-0">
+                                {{ youtubeChannel.description }}
+                            </p>
+
+                            <!-- Channel Stats -->
+                            <div class="flex flex-wrap justify-center lg:justify-start gap-8 mb-8">
+                                <div class="text-center lg:text-left">
+                                    <div class="text-2xl font-bold">{{ youtubeChannel.subscriberCount }}</div>
+                                    <div class="text-sm text-white/80">Subscribers</div>
+                                </div>
+                                <div class="text-center lg:text-left">
+                                    <div class="text-2xl font-bold">{{ youtubeChannel.videoCount }}</div>
+                                    <div class="text-sm text-white/80">Videos</div>
+                                </div>
+                                <div class="text-center lg:text-left">
+                                    <div class="text-2xl font-bold">{{ youtubeChannel.viewCount }}</div>
+                                    <div class="text-sm text-white/80">Views</div>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="flex flex-wrap justify-center lg:justify-start gap-4">
+                                <Button
+                                    size="lg"
+                                    class="bg-white text-red-600 hover:bg-white/90 hover:text-red-700"
+                                    @click="handleSubscribe"
+                                >
+                                    <Youtube class="h-5 w-5 mr-2" />
+                                    Subscribe to Channel
+                                </Button>
+
+                                <Button
+                                    v-if="isLive"
+                                    size="lg"
+                                    variant="outline"
+                                    class="border-white text-white hover:bg-white/20"
+                                    @click="watchLive"
+                                >
+                                    <Radio class="h-5 w-5 mr-2 animate-pulse" />
+                                    Watch Live Now
+                                </Button>
+                            </div>
+                        </div>
+
+                        <!-- Right Content - Floating Image -->
+                        <div class="relative hidden lg:block">
+                            <!-- Main floating image -->
+                            <div class="relative animate-float">
+                                <img
+                                    src="/images/live.png"
+                                    alt="Media illustration"
+                                    class="w-full max-w-lg mx-auto drop-shadow-2xl"
+                                />
+
+                                <!-- Optional: Small floating elements for extra flair -->
+                                <div class="absolute -top-6 -right-6 w-20 h-20 animate-float-slow">
+                                    <img
+                                        src="/images/live.png"
+                                        alt=""
+                                        class="w-full opacity-80"
+                                    />
+                                </div>
+
+                                <div class="absolute -bottom-4 -left-4 w-16 h-16 animate-float-slower">
+                                    <img
+                                        src="/images/live.png"
+                                        alt=""
+                                        class="w-full opacity-80"
+                                    />
+                                </div>
+                            </div>
+
+                            <!-- Glow effect behind image -->
+                            <div class="absolute inset-0 -z-10 bg-white/20 rounded-full blur-3xl scale-75 opacity-50"></div>
+                        </div>
+
+                        <!-- Mobile version - smaller image below text -->
+                        <div class="relative lg:hidden mt-8">
+                            <div class="relative animate-float">
+                                <img
+                                    src="/images/media-hero-image.png"
+                                    alt="Media illustration"
+                                    class="w-2/3 mx-auto drop-shadow-2xl"
+                                />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -1074,5 +1119,49 @@ onMounted(() => {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-10px) rotate(-1deg);
+    }
+    75% {
+        transform: translateY(10px) rotate(1deg);
+    }
+}
+
+@keyframes float-slow {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    33% {
+        transform: translateY(-15px) rotate(-5deg);
+    }
+    66% {
+        transform: translateY(15px) rotate(5deg);
+    }
+}
+
+@keyframes float-slower {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20px) rotate(-10deg);
+    }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+    animation: float-slow 8s ease-in-out infinite;
+}
+
+.animate-float-slower {
+    animation: float-slower 10s ease-in-out infinite;
 }
 </style>
