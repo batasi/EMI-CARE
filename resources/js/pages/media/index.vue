@@ -2,14 +2,14 @@
 import { Head, Link } from '@inertiajs/vue3'
 import {
     Youtube, Calendar, Clock, Eye, ThumbsUp,
-    MessageCircle, Share2, Play, Radio,
-    Film, ListVideo, Grid3X3,
-    ChevronLeft, ChevronRight, Sparkles,
-    Tv2, Users, Globe, Bell, X,
+    Share2, Play, Radio,
+    ListVideo, Grid3X3,
+    ChevronRight, Sparkles,
+    Users, Bell, X,
     Maximize2, Minimize2, Volume2, VolumeX,
     Loader2
 } from 'lucide-vue-next'
-import { computed, ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { computed, ref, onMounted, nextTick } from 'vue'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import FrontAppLayout from '@/layouts/FrontAppLayout.vue'
