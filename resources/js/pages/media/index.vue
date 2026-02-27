@@ -616,21 +616,8 @@ onMounted(() => {
 
                 <div class="container relative mx-auto px-4 py-16 lg:py-20">
                     <div class="max-w-4xl mx-auto text-center text-white">
-                        <!-- Channel Avatar -->
-                        <div v-if="youtubeChannel.thumbnail" class="mb-6">
-                            <img
-                                :src="youtubeChannel.thumbnail"
-                                :alt="youtubeChannel.name"
-                                class="w-24 h-24 rounded-full mx-auto border-4 border-white/30"
-                            />
-                        </div>
 
                         <!-- Channel Info -->
-                        <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium mb-6">
-                            <Youtube class="h-4 w-4" />
-                            <span>YouTube Channel</span>
-                        </div>
-
                         <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight mb-4">
                             {{ youtubeChannel.name }}
                         </h1>
