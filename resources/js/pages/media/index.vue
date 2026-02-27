@@ -28,7 +28,7 @@ const breadcrumbs: BreadcrumbItem[] = [
 
 // YouTube API configuration
 const YOUTUBE_API_KEY = 'AIzaSyC2DO4xkI5XO7LKWWxDqXneCJ7MvP8L8HA'
-const CHANNEL_ID = 'UC2GiTzYiq67dIioduTtO8QA' // ← REPLACE WITH YOUR ACTUAL CHANNEL ID
+const CHANNEL_ID = 'UCqYw-CTd1dU2yGI71sEyqNw' // ← REPLACE WITH YOUR ACTUAL CHANNEL ID
 
 // Loading states
 const isLoading = ref(true)
@@ -39,7 +39,7 @@ const error = ref<string | null>(null)
 const youtubeChannel = ref({
     name: 'Empowerment Missions Int.',
     handle: '@EmpowermentMissions',
-    url: 'https://www.youtube.com/@EmpowermentMissions',
+    url: 'https://www.youtube.com/@gmanews',
     channelId: CHANNEL_ID,
     subscriberCount: '0',
     videoCount: '0',
@@ -606,7 +606,7 @@ onMounted(() => {
             </Teleport>
 
             <!-- Hero Section -->
-            <section class="relative overflow-hidden bg-gradient-to-br from-red-600 via-red-500 to-primary">
+            <section class="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-primary">
                 <!-- Background Pattern -->
                 <div class="absolute inset-0 bg-grid-white/[0.05] bg-[size:20px_20px]" />
 

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Link, usePage } from '@inertiajs/vue3'
 import { Menu, Heart, PlayCircle, Phone, Calendar, ChevronDown, Shield } from 'lucide-vue-next'
-import { computed, ref } from 'vue'
+import { computed, ref, onMounted, onBeforeUnmount, watch } from 'vue'
 import AppLogoIcon from '@/components/AppLogoIcon.vue'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
@@ -50,20 +50,27 @@ type NavItemWithExact = NavItem & {
 
 type NavItemWithBadge = NavItem & {
     badge?: string | null
+    viewerCount?: number
 }
 
 type Props = {
-    showLiveBadge?: boolean
-    showGiveButton?: boolean
+    breadcrumbs?: any[]
+    isLive?: boolean
+    showAnnouncement?: boolean
     churchName?: string
     churchLocation?: string
+    liveViewerCount?: number
+    liveTitle?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    showLiveBadge: false,
-    showGiveButton: true,
+    breadcrumbs: () => [],
+    isLive: false,
+    showAnnouncement: true,
     churchName: 'Empowerment Missions International',
-    churchLocation: ''
+    churchLocation: '',
+    liveViewerCount: 0,
+    liveTitle: 'Live Now'
 })
 
 const page = usePage()
@@ -78,6 +85,55 @@ const toggleMobileItem = (title: string) => {
     expandedMobileItems.value[title] = !expandedMobileItems.value[title]
 }
 
+// Live stream state
+const currentViewerCount = ref(props.liveViewerCount)
+const liveTitle = ref(props.liveTitle)
+
+// Update when props change
+watch(() => props.isLive, (newVal) => {
+    if (newVal) {
+        startViewerSimulation()
+    } else {
+        stopViewerSimulation()
+    }
+})
+
+watch(() => props.liveViewerCount, (newVal) => {
+    currentViewerCount.value = newVal
+})
+
+watch(() => props.liveTitle, (newVal) => {
+    liveTitle.value = newVal
+})
+
+// Simulate viewer count updates (only for demo - in production, use real API data)
+let viewerInterval: ReturnType<typeof setInterval> | null = null
+
+const startViewerSimulation = () => {
+    if (viewerInterval) return
+    viewerInterval = setInterval(() => {
+        const variation = Math.floor(Math.random() * 10) - 5
+        currentViewerCount.value = Math.max(0, currentViewerCount.value + variation)
+    }, 10000)
+}
+
+const stopViewerSimulation = () => {
+    if (viewerInterval) {
+        clearInterval(viewerInterval)
+        viewerInterval = null
+    }
+}
+
+onMounted(() => {
+    if (props.isLive) {
+        startViewerSimulation()
+    }
+})
+
+onBeforeUnmount(() => {
+    stopViewerSimulation()
+})
+
 // Updated navigation items for charity organization
 const mainNavItems: NavItemWithExact[] = [
     {
@@ -88,24 +144,10 @@ const mainNavItems: NavItemWithExact[] = [
     {
         title: 'Our story',
         href: '/about',
-        // children: [
-        //     { title: 'Our Story', href: '/about/story' },
-        //     { title: 'S.E.E. Model', href: '/about/see-model' },
-        //     { title: 'Leadership', href: '/about/leadership' },
-        //     { title: 'Annual Reports', href: '/about/reports' },
-        //     { title: 'Our Policies', href: '/about/policies' }
-        // ]
     },
     {
         title: 'Our Impact',
         href: '/impact',
-        // children: [
-        //     { title: 'Education Support', href: '/work/education' },
-        //     { title: 'Economic Empowerment', href: '/work/economic' },
-        //     { title: 'Spiritual Growth', href: '/work/spiritual' },
-        //     { title: 'EMI-Care UK', href: '/work/emi-care' },
-        //     { title: 'Community Projects', href: '/work/projects' }
-        // ]
     },
     {
         title: 'Contact Us',
@@ -133,17 +175,18 @@ const mainNavItems: NavItemWithExact[] = [
     }
 ]
 
-// Updated quick action items for charity
-const quickActionItems: NavItemWithBadge[] = [
+// Updated quick action items with live viewer count
+const quickActionItems = computed<NavItemWithBadge[]>(() => [
     {
         title: 'Live Stream',
         href: '/media',
         icon: PlayCircle,
-        badge: props.showLiveBadge ? 'Live' : null
+        badge: props.isLive ? 'Live' : null,
+        viewerCount: props.isLive ? currentViewerCount.value : 0
     },
     {
         title: 'Events',
-        href: '/events',
+        href: '#',
         icon: Calendar
     },
     {
@@ -151,15 +194,14 @@ const quickActionItems: NavItemWithBadge[] = [
         href: '/contact',
         icon: Phone
     }
-]
+])
 
-// Check if user is logged in (for member area)
+// Check if user is logged in
 const user = computed(() => page.props.auth?.user)
 </script>
 
 <template>
     <div class="sticky top-0 z-50 w-full border-b bg-green-100 backdrop-blur-lg supports-[backdrop-filter]:bg-green-100 dark:border-gray-800">
-
 
         <div class="container mx-auto flex h-16 lg:h-20 items-center px-4">
             <!-- Mobile Menu Trigger -->
@@ -180,7 +222,6 @@ const user = computed(() => page.props.auth?.user)
                                         style="width: auto; max-width: none;"
                                     />
                                 </div>
-
                             </div>
                         </SheetHeader>
 
@@ -259,18 +300,30 @@ const user = computed(() => page.props.auth?.user)
                                     <SheetClose v-for="action in quickActionItems" :key="action.title" as-child>
                                         <Link
                                             :href="action.href"
-                                            class="flex flex-col items-center justify-center rounded-lg border border-border p-3 text-center hover:bg-accent transition-colors"
+                                            class="flex flex-col items-center justify-center rounded-lg border border-border p-3 text-center hover:bg-accent transition-colors relative"
+                                            :class="action.badge ? 'border-red-200 bg-red-50' : ''"
                                         >
                                             <component
                                                 :is="action.icon"
-                                                class="h-5 w-5 mb-2 text-primary"
+                                                class="h-5 w-5 mb-2"
+                                                :class="action.badge ? 'text-red-600' : 'text-primary'"
                                             />
                                             <span class="text-xs font-medium">{{ action.title }}</span>
                                             <span
                                                 v-if="action.badge"
-                                                class="mt-1 text-xs rounded-full bg-destructive px-2 py-0.5 text-destructive-foreground"
+                                                class="absolute -top-1 -right-1 flex items-center gap-1 bg-red-600 text-white text-[10px] px-1.5 py-0.5 rounded-full"
                                             >
-                                                {{ action.badge }}
+                                                <span class="relative flex h-1.5 w-1.5">
+                                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                                                    <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-white"></span>
+                                                </span>
+                                                LIVE
+                                            </span>
+                                            <span
+                                                v-if="action.viewerCount && action.viewerCount > 0"
+                                                class="mt-1 text-[10px] text-muted-foreground"
+                                            >
+                                                {{ action.viewerCount }} watching
                                             </span>
                                         </Link>
                                     </SheetClose>
@@ -308,7 +361,6 @@ const user = computed(() => page.props.auth?.user)
                         style="width: auto; max-width: none;"
                     />
                 </div>
-
             </Link>
 
             <!-- Desktop Navigation -->
@@ -323,7 +375,7 @@ const user = computed(() => page.props.auth?.user)
                             <template v-if="item.children">
                                 <NavigationMenuTrigger
                                     :class="[
-                                        'h-12 px-4 text-md  font-medium transition-all duration-200 bg-green-100 text-primary hover:text-primary data-[state=open]:text-primary data-[state=open]:bg-primary/10',
+                                        'h-12 px-4 text-md font-medium transition-all duration-200 bg-green-100 text-primary hover:text-primary data-[state=open]:text-primary data-[state=open]:bg-primary/10',
                                         isCurrentUrl(item.href) ? activeItemStyles : 'hover:bg-green-600'
                                     ]"
                                 >
@@ -331,11 +383,10 @@ const user = computed(() => page.props.auth?.user)
                                 </NavigationMenuTrigger>
                                 <NavigationMenuContent class="bg-green-200">
                                     <ul class="grid w-[300px] gap-3 p-4 md:w-[500px] lg:w-[300px]">
-
                                         <li
                                             v-for="child in item.children"
                                             :key="child.title"
-                                         >
+                                        >
                                             <NavigationMenuLink as-child>
                                                 <Link
                                                     :href="child.href"
@@ -344,7 +395,6 @@ const user = computed(() => page.props.auth?.user)
                                                     <div class="text-lg font-medium leading-none text-primary">
                                                        {{ child.title }}
                                                     </div>
-
                                                 </Link>
                                             </NavigationMenuLink>
                                         </li>
@@ -374,30 +424,6 @@ const user = computed(() => page.props.auth?.user)
 
             <!-- Right Side Actions -->
             <div class="ml-auto flex items-center space-x-2 sm:space-x-3">
-                <!-- Live Stream Badge - Responsive -->
-                <template v-if="showLiveBadge">
-                    <Button
-                        as-child
-                        variant="destructive"
-                        size="sm"
-                        class="gap-1.5 animate-pulse hidden xs:flex btn-glow"
-                    >
-                        <Link href="/live" class="flex items-center">
-                            <PlayCircle class="h-4 w-4" />
-                            <span class="sm:inline">Live Now</span>
-                        </Link>
-                    </Button>
-                    <Button
-                        as-child
-                        variant="destructive"
-                        size="icon"
-                        class="animate-pulse xs:hidden btn-glow"
-                    >
-                        <Link href="/live">
-                            <PlayCircle class="h-4 w-4" />
-                        </Link>
-                    </Button>
-                </template>
 
                 <!-- Quick Actions Desktop -->
                 <div class="hidden lg:flex items-center space-x-1">
@@ -409,16 +435,18 @@ const user = computed(() => page.props.auth?.user)
                                     size="icon"
                                     as-child
                                     class="h-10 w-10 relative hover:bg-green-600"
+                                    :class="action.badge ? 'text-red-600 hover:text-red-700' : ''"
                                 >
                                     <Link :href="action.href">
                                         <span class="sr-only">{{ action.title }}</span>
                                         <component
                                             :is="action.icon"
-                                            class="h-5 w-5 text-foreground"
+                                            class="h-5 w-5"
+                                            :class="action.badge ? 'animate-pulse' : ''"
                                         />
                                         <span
                                             v-if="action.badge"
-                                            class="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-destructive text-[10px] text-destructive-foreground flex items-center justify-center"
+                                            class="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-[10px] text-white ring-2 ring-background"
                                         >
                                             ●
                                         </span>
@@ -426,7 +454,12 @@ const user = computed(() => page.props.auth?.user)
                                 </Button>
                             </TooltipTrigger>
                             <TooltipContent class="bg-background border-border">
-                                <p class="text-foreground">{{ action.title }}</p>
+                                <p class="text-foreground flex items-center gap-1">
+                                    {{ action.title }}
+                                    <span v-if="action.viewerCount && action.viewerCount > 0" class="text-xs text-muted-foreground">
+                                        ({{ action.viewerCount }} watching)
+                                    </span>
+                                </p>
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
@@ -434,7 +467,7 @@ const user = computed(() => page.props.auth?.user)
 
                 <!-- Donate Button -->
                 <Button
-                    v-if="showGiveButton"
+
                     as-child
                     size="sm"
                     class="hidden lg:flex gap-1.5 bg-primary hover:bg-primary/90 h-10 text-primary-foreground btn-glow"
@@ -519,6 +552,7 @@ const user = computed(() => page.props.auth?.user)
                 </template>
             </div>
         </div>
+
         <!-- Announcement Bar -->
         <div class="border-t bg-green-500 py-2 dark:from-primary/20 dark:via-accent/10 dark:to-secondary/20">
             <div class="container mx-auto px-4">
@@ -560,5 +594,47 @@ const user = computed(() => page.props.auth?.user)
 
 .dark .border-b {
     border-bottom-color: hsl(217.2 32.6% 17.5%);
+}
+
+/* Live button glow effect */
+.btn-live-glow {
+    animation: glow 2s ease-in-out infinite;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+}
+
+@keyframes glow {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
+    }
+}
+
+/* Shimmer animation for live alert bar */
+@keyframes shimmer {
+    100% {
+        transform: translateX(200%);
+    }
+}
+
+.animate-shimmer {
+    animation: shimmer 3s infinite;
+}
+
+/* Pulse animation for live indicator */
+@keyframes pulse-live {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+.animate-pulse-live {
+    animation: pulse-live 2s ease-in-out infinite;
 }
 </style>
