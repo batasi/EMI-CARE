@@ -124,6 +124,7 @@ const mainNavItems: NavItemWithExact[] = [
         title: 'Events',
         href: '#',
         children: [
+            { title: 'Media', href: '/media' },
             { title: 'Upcoming Events', href: '#' },
             { title: 'Community Gatherings', href: '#' },
             { title: 'Workshops', href: '#' },
@@ -136,7 +137,7 @@ const mainNavItems: NavItemWithExact[] = [
 const quickActionItems: NavItemWithBadge[] = [
     {
         title: 'Live Stream',
-        href: '/live',
+        href: '/media',
         icon: PlayCircle,
         badge: props.showLiveBadge ? 'Live' : null
     },
