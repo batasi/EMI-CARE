@@ -446,9 +446,9 @@ const user = computed(() => page.props.auth?.user)
                                         />
                                         <span
                                             v-if="action.badge"
-                                            class="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-[10px] text-white ring-2 ring-background"
+                                            class="absolute -top-1 -right-1 flex h-5 w-auto items-center justify-center rounded-full bg-red-600 text-[10px] text-white ring-2 ring-background"
                                         >
-                                            ●
+                                            ● LIVE
                                         </span>
                                     </Link>
                                 </Button>
