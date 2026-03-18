@@ -405,7 +405,7 @@ const isLive = computed(() => {
                         </h1>
 
                         <p class="text-xl text-muted-foreground leading-relaxed">
-                            Join our community of dedicated volunteers making a real difference in the UK and Africa.
+                            Join our community of dedicated volunteers making a real difference in the UK, Africa & Worldwide.
                             Your time and skills can transform lives.
                         </p>
 
@@ -643,7 +643,7 @@ const isLive = computed(() => {
                                 </ul>
                             </div>
 
-                            <Button variant="outline" class="w-full mt-4" @click="$scrollTo('#volunteer-form')">
+                            <Button variant="outline" class="w-full mt-4" @click="'#volunteer-form'">
                                 Apply for this Role
                                 <ArrowRight class="h-4 w-4 ml-2" />
                             </Button>

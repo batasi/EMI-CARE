@@ -27,17 +27,6 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ]
 
-// Charity information (reused from home page)
-const charityInfo = {
-    name: 'Empowerment Missions Int.',
-    charityNumber: '1141696',
-    companyNumber: '05893970',
-    tagline: 'Empowering People - Socio-spiritually, Economically & Educationally',
-    address: '65 Fairwater Drive, Woodley, Reading, RG5 3JG',
-    phone: '07727208820',
-    email: 'enquiry@empowermentmissions.org.uk',
-    website: 'www.empowermentmissions.org.uk',
-}
 
 // Donation form handling
 const donationForm = useForm({
@@ -291,7 +280,7 @@ const isLive = computed(() => {
                         <p class="text-xl text-muted-foreground leading-relaxed">
                             Every donation, whether large or small, helps us empower communities through
                             <span class="font-semibold text-gray-900">education, healthcare, and economic opportunities</span>
-                            in the UK and Africa.
+                            in the UK, Africa & Worldwide.
                         </p>
 
                         <!-- Quick Impact Stats -->
@@ -314,14 +303,7 @@ const isLive = computed(() => {
                             </div>
                         </div>
 
-                        <!-- Charity Registration -->
-                        <div class="flex items-center gap-4 bg-white/50 backdrop-blur-sm rounded-lg p-3 border border-gray-100">
-                            <Shield class="h-5 w-5 text-primary shrink-0" />
-                            <p class="text-xs text-muted-foreground">
-                                UK Registered Charity No: {{ charityInfo.charityNumber }} |
-                                Company No: {{ charityInfo.companyNumber }}
-                            </p>
-                        </div>
+
                     </div>
 
                     <!-- Right Content - Image Carousel (donation focused) -->
