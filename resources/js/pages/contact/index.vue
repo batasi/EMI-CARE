@@ -204,7 +204,7 @@ const isLive = computed(() => {
                         Visit Us in Person
                     </h2>
                     <p class="text-lg text-muted-foreground">
-                        We have offices in the UK and Kenya. Please call ahead to schedule an appointment.
+                        Please call ahead to schedule an appointment.
                     </p>
                 </div>
 
@@ -309,14 +309,7 @@ const isLive = computed(() => {
                             </div>
 
                             <div class="space-y-3">
-                                <div class="flex justify-between py-2 border-b border-gray-100">
-                                    <span class="text-sm text-muted-foreground">Charity Number</span>
-                                    <span class="text-sm font-medium">{{ charityInfo.charityNumber }}</span>
-                                </div>
-                                <div class="flex justify-between py-2 border-b border-gray-100">
-                                    <span class="text-sm text-muted-foreground">Company Number</span>
-                                    <span class="text-sm font-medium">{{ charityInfo.companyNumber }}</span>
-                                </div>
+
                                 <div class="flex justify-between py-2">
                                     <span class="text-sm text-muted-foreground">Founded</span>
                                     <span class="text-sm font-medium">2011</span>

@@ -311,7 +311,7 @@ const handleMouseLeave = () => {
                                 <div class="text-sm text-muted-foreground">Funds to Mission</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-2xl font-bold text-primary">UK & Kenya</div>
+                                <div class="text-2xl font-bold text-primary">Worldwide</div>
                                 <div class="text-sm text-muted-foreground">Service Areas</div>
                             </div>
                         </div>
