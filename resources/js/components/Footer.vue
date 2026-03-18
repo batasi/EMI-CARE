@@ -77,21 +77,19 @@ const currentYear = new Date().getFullYear()
                 />
             </div>
 
-          <p class="font-semibold ">
-            UK Registered Charity No: {{ charityInfo.charityNumber }}
-          </p>
 
-          <div class="space-y-2 font-semibold text-primary-foreground">
+
+          <div class="space-y-2 text-primary-foreground">
             <div class="flex items-center gap-2">
-              <MapPin class="h-3.5 w-3.5 flex-shrink-0 font-semibold text-primary-foreground" />
+              <MapPin class="h-3.5 w-3.5 flex-shrink-0 text-primary-foreground" />
               <span>{{ charityInfo.address }}</span>
             </div>
             <div class="flex items-center gap-2">
-              <Mail class="h-3.5 w-3.5 flex-shrink-0 font-semibold text-primary-foreground" />
+              <Mail class="h-3.5 w-3.5 flex-shrink-0 text-primary-foreground" />
               <span>{{ charityInfo.email }}</span>
             </div>
             <div class="flex items-center gap-2">
-              <Phone class="h-3.5 w-3.5 flex-shrink-0 font-semibold text-primary-foreground" />
+              <Phone class="h-3.5 w-3.5 flex-shrink-0 text-primary-foreground" />
               <span>{{ charityInfo.phone }}</span>
             </div>
           </div>
@@ -115,7 +113,7 @@ const currentYear = new Date().getFullYear()
         <div class="lg:col-span-5">
           <div class="grid grid-cols-3 gap-6 mb-6">
             <div v-for="section in props.items" :key="section.title">
-              <h3 class="font-semibold text-sm mb-3">{{ section.title }}</h3>
+              <h3 class="text-sm mb-3">{{ section.title }}</h3>
               <ul class="space-y-2">
                 <li v-for="item in section.items" :key="item.title">
                   <Link
@@ -132,7 +130,7 @@ const currentYear = new Date().getFullYear()
           <!-- Subscribe Section -->
           <div class="border-t border-gray-800 pt-6">
             <h3 class="font-semibold mb-2">Subscribe to our newsletter</h3>
-            <p class="font-semibold text-primary-foreground mb-3">Get updates on our projects and impact</p>
+            <p class=" text-primary-foreground mb-3">Get updates on our projects and impact</p>
             <form class="flex gap-2">
               <input
                 type="email"
@@ -160,7 +158,7 @@ const currentYear = new Date().getFullYear()
             Donate Now
           </Link>
 
-          <p class="font-semibold text-primary-foreground">
+          <p class="text-primary-foreground">
             Empowering communities in the UK and Africa through faith-based initiatives.
           </p>
         </div>
@@ -171,9 +169,9 @@ const currentYear = new Date().getFullYear()
     <div class="border-t border-white">
       <div class="container mx-auto px-4 py-4">
         <div class="flex flex-col md:flex-row justify-between items-center gap-2 text-black">
-          <div class="font-semibold text-primary-foreground">© {{ currentYear }} {{ charityInfo.name }}</div>
-          <div class="font-semibold text-primary-foreground">Designed & Developed by <u class="font-semibold text-primary">bAtasi</u></div>
-          <div class="flex gap-4 font-semibold text-primary-foreground">
+          <div class="text-primary-foreground">© {{ currentYear }} {{ charityInfo.name }}</div>
+          <div class=" text-primary-foreground">Designed & Developed by <u class="font-semibold text-primary">bAtasi</u></div>
+          <div class="flex gap-4 text-primary-foreground">
             <Link href="/privacy-policy" class="hover:text-white transition-colors">Privacy</Link>
             <Link href="/terms-of-use" class="hover:text-white transition-colors">Terms</Link>
             <Link href="/safeguarding" class="hover:text-white transition-colors">Safeguarding</Link>
