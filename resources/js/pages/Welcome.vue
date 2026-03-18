@@ -154,7 +154,7 @@ const mainActivities = [
     },
     {
         title: 'Community Development',
-        description: 'Empowering communities in the UK and Africa',
+        description: 'Empowering communities in the UK, Africa & Worldwide',
         icon: Building
     }
 ]
@@ -328,7 +328,7 @@ const isLive = computed(() => {
                                 <div class="text-sm text-muted-foreground">Founded</div>
                             </div>
                             <div class="text-center">
-                                <div class="text-2xl font-bold text-green-700">UK & Africa</div>
+                                <div class="text-2xl font-bold text-green-700">Worldwide</div>
                                 <div class="text-sm text-muted-foreground">Areas of Operation</div>
                             </div>
                             <div class="text-center">
@@ -458,9 +458,9 @@ const isLive = computed(() => {
                         </h2>
 
                         <p class="text-lg text-muted-foreground">
-                            As a UK registered charity (No: 1141696), we're committed to transforming lives
+                            We're committed to transforming lives
                             through faith-based initiatives, educational support, and economic empowerment
-                            in the UK and Africa.
+                            in the UK, Africa & Worldwide
                         </p>
 
                         <Separator />
@@ -524,7 +524,7 @@ const isLive = computed(() => {
 
                     <p class="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
                         Three interconnected pillars working together to create lasting transformation
-                        in communities across the UK and Africa
+                        in communities across the UK, Africa & Worldwide
                     </p>
                 </div>
 
@@ -576,7 +576,7 @@ const isLive = computed(() => {
                                 <div class="space-y-4">
                                     <div class="flex items-center gap-3 text-sm">
                                         <div class="w-2 h-2 rounded-full" :class="pillar.color.replace('text', 'bg')"></div>
-                                        <span class="text-muted-foreground">Active in UK & Kenya</span>
+                                        <span class="text-muted-foreground">Active in UK, Africa & Worldwide</span>
                                     </div>
                                     <div class="flex items-center gap-3 text-sm">
                                         <div class="w-2 h-2 rounded-full" :class="pillar.color.replace('text', 'bg')"></div>

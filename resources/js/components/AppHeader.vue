@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Link, usePage } from '@inertiajs/vue3'
-import { Menu, Heart, PlayCircle, Phone, Calendar, ChevronDown, Shield } from 'lucide-vue-next'
+import { Menu, Heart, PlayCircle, Phone, Calendar, ChevronDown} from 'lucide-vue-next'
 import { computed, ref, onMounted, onBeforeUnmount, watch } from 'vue'
 import AppLogoIcon from '@/components/AppLogoIcon.vue'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -557,12 +557,10 @@ const user = computed(() => page.props.auth?.user)
         <div class="border-t bg-green-500 py-2 dark:from-primary/20 dark:via-accent/10 dark:to-secondary/20">
             <div class="container mx-auto px-4">
                 <div class="flex flex-col sm:flex-row items-center justify-center text-sm gap-2 sm:gap-0">
-                    <div class="flex items-center gap-2">
-                        <Shield class="h-4 w-4 text-primary-foreground" />
-                        <span class="font-medium text-primary-foreground">UK Registered Charity No: 1141696</span>
-                    </div>
+
                     <span class="hidden sm:inline mx-2 text-primary-foreground">•</span>
-                    <span class="text-center text-primary-foreground">Empowering Communities in the UK & Africa</span>
+                    <span class="text-center text-primary-foreground">Empowering Communities in the UK, Africa & Worldwide</span>
+                    <span class="hidden sm:inline mx-2 text-primary-foreground">•</span>
                 </div>
             </div>
         </div>
