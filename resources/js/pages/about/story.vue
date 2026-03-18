@@ -21,21 +21,6 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-// Charity information
-const charityInfo = {
-    name: 'Empowerment Missions International',
-    charityNumber: '1141696',
-    companyNumber: '05893970',
-    tagline: 'Empowering People - Socio-spiritually, Economically & Educationally',
-    description: 'A UK registered charity dedicated to transforming lives through holistic empowerment.',
-    address: '65 Fairwater Drive, Woodley, Reading, RG5 3JG',
-    phone: '07727208820',
-    email: 'enquiry@empowermentmissions.org.uk',
-    website: 'www.empowermentmissions.org.uk',
-    areas: ['Bedford', 'Reading', 'Kenya'],
-    financialYear: 'Ending August 31, 2024',
-    status: 'Active & Reporting'
-}
 
 // Core values from your actual content
 const coreValues = [
@@ -65,7 +50,7 @@ const coreValues = [
 const whyChooseFeatures = [
     {
         title: 'Registered & Verified',
-        description: 'Charity Number: 1141696, UK Charity Commission',
+
         icon: CheckCircle
     },
     {
@@ -255,11 +240,9 @@ const isLive = computed(() => {
                             <div class="bg-gradient-to-r from-primary/10 to-primary/5 px-6 py-5 border-b border-primary/10">
                                 <h3 class="text-xl font-bold flex items-center gap-2">
                                     <Shield class="h-5 w-5 text-primary" />
-                                    <span>Charity Information</span>
+                                    <span>Organization Information</span>
                                 </h3>
-                                <p class="text-sm text-muted-foreground mt-1">
-                                    UK Registered Charity No: {{ charityInfo.charityNumber }}
-                                </p>
+
                             </div>
 
                             <div class="p-6">
@@ -421,7 +404,7 @@ const isLive = computed(() => {
                     </div>
 
                     <p class="text-sm text-muted-foreground mt-8">
-                        UK Registered Charity No: {{ charityInfo.charityNumber }} | 100% of funds go directly to our mission
+                       100% of funds go directly to our mission
                     </p>
                 </div>
             </div>
